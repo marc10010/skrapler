@@ -6,6 +6,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+
+
 
 
 const modulosMaterial = [
@@ -14,6 +18,8 @@ const modulosMaterial = [
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatIconModule,
+    MatCardModule,
 ]
 
 @NgModule({

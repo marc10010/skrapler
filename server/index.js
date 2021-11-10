@@ -17,7 +17,7 @@ dotenv.config();
 //Get Bearer Token from .env 
 const BearerToken = process.env.BEARER_TOKEN;
 
-const endpointUrl = "https://api.twitter.com/2/tweets/search/recent";
+const endpointUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 
 //Get Tweets from Twitter API
 const getTweets = async(id) => {

@@ -1,0 +1,15 @@
+.container {
+    height: 100%;
+    padding: 10px 30px;
+}
+div.mapa{
+    height: 100%;
+}
+div.info{
+    height: 100%;
+    display: flex;
+}
+.tweet {
+    height: calc(100% - 150px);
+    overflow: scroll;
+}

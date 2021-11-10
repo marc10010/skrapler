@@ -1,9 +1,37 @@
 <div class="container" fxLayout = "row wrap">
-    <div fxFlex = "65" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;">
+
+
+    <div class="mapa" fxFlex = "65" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;">
         <p>Mapa de palabras</p>
     </div>
 
-    <div fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;">
-        <p>Lista de tweets</p>
+    <div class="info" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
+        <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black; height: 150px;">
+            <div fxFlex= "20" style="text-align: left;">
+                <img src="{{infoUser.image}}" alt="">
+
+                <mat-icon *ngIf=infoUser.verified >verified</mat-icon>
+            </div>
+            <div fxFlex= "30" >username: {{infoUser.username}}</div>
+            <div fxFlex= "30" style="text-align: left;">name: {{infoUser.name}}</div>
+            <div fxFlex= "100" style="text-align: left;">description: {{infoUser.description}}</div>
+            <div fxFlex= "100" style="text-align: left;">location: {{infoUser.location}}</div>
+            <div fxFlex= "100" style="align-content: flex-end;">
+                <button (click) = "openLink()">Go to twitter</button>
+            </div>     
+        </div>
+        <div class="tweet" fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" >
+            <mat-card class="example-card" *ngFor="let tweet of tweets" (click)=sayHi(tweet)>
+                <mat-card-title>{{infoUser.name}}</mat-card-title>
+                <mat-card-subtitle>@{{infoUser.username}}</mat-card-subtitle>
+                <mat-card-content>
+                  <p>{{tweet.full_text}}</p>
+                </mat-card-content>
+                <mat-card-footer>
+                    <p>Retweets: {{tweet.retweet_count}}</p>
+                    <p>Likes: {{tweet.favorite_count}} </p>
+                </mat-card-footer>
+            </mat-card>
+        </div>
     </div>
 </div>

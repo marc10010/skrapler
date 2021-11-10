@@ -32,10 +32,14 @@ import { ApiResponse } from '../types/api';
     */
     //LLamadas a la api apartir de aqui
 
-    llamadaDePrueba(){
-      
-      console.log("voy");
-      return this.http.get<any>('http://localhost:3000/api/tweet_header/barackobama',
+    infoUser(username: any){
+      return this.http.get<any>('http://localhost:3000/search/' + username,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
+    obtenerTweets(username: any){
+      return this.http.get<any>('http://localhost:3000/home_timeline/' + username,
       { headers: {'Access-Control-Allow-Origin': '*',
                   'Access-Control-Allow-Methods': 'GET'}
         });
