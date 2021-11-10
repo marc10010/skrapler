@@ -20,6 +20,7 @@ export class TwitterComponent implements OnInit {
   }
   tweets: Tweets[]=[];
   tweetsOriginal: any[]=[];
+  nombre: string= "";
 
 
   constructor(
@@ -27,7 +28,17 @@ export class TwitterComponent implements OnInit {
   ) {   }
 
   ngOnInit(): void {
-    this.apiTwitter.infoUser('barackobama').subscribe(data=> {
+    
+  }
+
+  openLink(){
+    window.open("https://twitter.com/"+ this.infoUser.username)
+  }
+  sayHi(tweet: Tweets){
+    window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
+  }
+  buscar(){
+    this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
       this.infoUser.name= data[0].name;
       this.infoUser.username= data[0].screen_name;
       this.infoUser.description= data[0].description;
@@ -38,7 +49,7 @@ export class TwitterComponent implements OnInit {
       console.log(this.infoUser);
     });
 
-    this.apiTwitter.obtenerTweets('barackobama').subscribe(data=> {
+    this.apiTwitter.obtenerTweets(this.nombre).subscribe(data=> {
       this.tweetsOriginal = data;
       this.tweets= data.map(((tweet: { created_at: any; id: any; full_text: any; id_str: string; retweet_count: any; favorite_count: any}) => ({
         created : tweet.created_at,
@@ -50,14 +61,6 @@ export class TwitterComponent implements OnInit {
       })));
       console.log(this.tweets)
     });
-
-  }
-
-  openLink(){
-    window.open("https://twitter.com/"+ this.infoUser.username)
-  }
-  sayHi(tweet: Tweets){
-    window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
   }
 
 }

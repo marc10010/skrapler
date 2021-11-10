@@ -2,14 +2,16 @@
 
 
     <div class="mapa" fxFlex = "65" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;">
-        <p>Mapa de palabras</p>
+        <mat-form-field appearance="outline">
+            <mat-label> @ usuario</mat-label>
+            <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
+        </mat-form-field>
     </div>
 
-    <div class="info" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
+    <div *ngIf="tweets.length >0"  class="info" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
         <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black; height: 150px;">
             <div fxFlex= "20" style="text-align: left;">
                 <img src="{{infoUser.image}}" alt="">
-
                 <mat-icon *ngIf=infoUser.verified >verified</mat-icon>
             </div>
             <div fxFlex= "30" >username: {{infoUser.username}}</div>
@@ -20,12 +22,19 @@
                 <button (click) = "openLink()">Go to twitter</button>
             </div>     
         </div>
+        <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;"> Filtros</div>
         <div class="tweet" fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" >
-            <mat-card class="example-card" *ngFor="let tweet of tweets" (click)=sayHi(tweet)>
-                <mat-card-title>{{infoUser.name}}</mat-card-title>
+            <mat-card class="card" *ngFor="let tweet of tweets">
+                
+                <mat-card-title> {{infoUser.name}}  </mat-card-title>
                 <mat-card-subtitle>@{{infoUser.username}}</mat-card-subtitle>
+                
                 <mat-card-content>
                   <p>{{tweet.full_text}}</p>
+                  <button  (click)=sayHi(tweet)>  Go to Tweet </button>
+                  <p style="text-align: end;"> 
+                      {{tweet.created | date: 'hh:mm mm-dd-yyyy'}}  
+                  </p>
                 </mat-card-content>
                 <mat-card-footer>
                     <p>Retweets: {{tweet.retweet_count}}</p>
