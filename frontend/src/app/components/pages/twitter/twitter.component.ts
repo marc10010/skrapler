@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiTwitter } from 'src/app/services/api.twitter';
 
 @Component({
   selector: 'app-twitter',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TwitterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private apiTwitter: ApiTwitter,
+  ) {   }
 
   ngOnInit(): void {
+    this.apiTwitter.llamadaDePrueba().subscribe(data=> {
+      console.log(data);
+    });
   }
 
 }
