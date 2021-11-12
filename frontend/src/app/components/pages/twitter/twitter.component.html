@@ -1,16 +1,20 @@
 <div class="container" fxLayout = "row wrap">
 
+<!-- *ngIf="tweets.length >0"-->
+    <div class="mapa" fxFlex = "65" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
+        <div fxFlex = "100">
 
-    <div class="mapa" fxFlex = "65" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;">
-        <mat-form-field appearance="outline">
-            <mat-label> @ usuario</mat-label>
-            <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label> @ usuario</mat-label>
+                <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
+            </mat-form-field>
+        </div>
+        <p>mapa de palabras</p>
     </div>
 
-    <div *ngIf="tweets.length >0"  class="info" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
-        <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black; height: 150px;">
-            <div fxFlex= "20" style="text-align: left;">
+    <div  class="info" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
+        <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style=" height: 150px;">
+            <div  fxFlex= "20" style="text-align: left;">
                 <img src="{{infoUser.image}}" alt="">
                 <mat-icon *ngIf=infoUser.verified >verified</mat-icon>
             </div>
@@ -19,11 +23,15 @@
             <div fxFlex= "100" style="text-align: left;">description: {{infoUser.description}}</div>
             <div fxFlex= "100" style="text-align: left;">location: {{infoUser.location}}</div>
             <div fxFlex= "100" style="align-content: flex-end;">
-                <button (click) = "openLink()">Go to twitter</button>
+                <button *ngIf="tweets.length >0"  mat-raised-button (click) = "openLink()">Go to Twitter</button>
             </div>     
         </div>
-        <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style="border: 1px solid black;"> Filtros</div>
-        <div class="tweet" fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" >
+        <div  fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
+            <button (click)="openDialogFilter()" *ngIf="tweets.length >0" mat-raised-button>
+                <mat-icon> filter_alt</mat-icon>  Filter 
+            </button> 
+        </div>
+        <div  class="tweet" fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" >
             <mat-card class="card" *ngFor="let tweet of tweets">
                 
                 <mat-card-title> {{infoUser.name}}  </mat-card-title>
@@ -31,9 +39,9 @@
                 
                 <mat-card-content>
                   <p>{{tweet.full_text}}</p>
-                  <button  (click)=sayHi(tweet)>  Go to Tweet </button>
+                  <button mat-raised-button  (click)=sayHi(tweet)>  Go to the Tweet </button>
                   <p style="text-align: end;"> 
-                      {{tweet.created | date: 'hh:mm mm-dd-yyyy'}}  
+                      {{tweet.created | date: 'HH:mm dd-MM-yyyy'}}  
                   </p>
                 </mat-card-content>
                 <mat-card-footer>

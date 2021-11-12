@@ -4,12 +4,14 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MatDialogModule } from "@angular/material/dialog";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { TwitterComponent } from './components/pages/twitter/twitter.component';
 import { FacebookComponent } from './components/pages/facebook/facebook.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TwitterFilterComponent } from './components/popups/twitter-filter/twitter-filter.component';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppComponent,
     HeaderComponent,
     TwitterComponent,
-    FacebookComponent
+    FacebookComponent,
+    TwitterFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

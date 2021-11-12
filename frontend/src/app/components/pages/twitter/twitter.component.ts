@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiTwitter } from 'src/app/services/api.twitter';
 import { Tweets } from 'src/app/types/api';
+import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
 
 @Component({
   selector: 'app-twitter',
@@ -21,13 +23,16 @@ export class TwitterComponent implements OnInit {
   tweets: Tweets[]=[];
   tweetsOriginal: any[]=[];
   nombre: string= "";
+  selector= 1;
 
 
   constructor(
     private apiTwitter: ApiTwitter,
+    public dialog: MatDialog,
   ) {   }
 
   ngOnInit(): void {
+    this.selector = 1;
     
   }
 
@@ -50,7 +55,6 @@ export class TwitterComponent implements OnInit {
     });
 
     this.apiTwitter.obtenerTweets(this.nombre).subscribe(data=> {
-      this.tweetsOriginal = data;
       this.tweets= data.map(((tweet: { created_at: any; id: any; full_text: any; id_str: string; retweet_count: any; favorite_count: any}) => ({
         created : tweet.created_at,
         id : tweet.id,
@@ -59,7 +63,22 @@ export class TwitterComponent implements OnInit {
         retweet_count : tweet.retweet_count,
         favorite_count : tweet.favorite_count,
       })));
-      console.log(this.tweets)
+      this.tweetsOriginal = data;
+      
+    });
+  }
+
+  openDialogFilter(){
+    const dialogRef = this.dialog.open(TwitterFilterComponent, {
+      
+      data: {picker: this.selector.toString(), fechaFin: this.tweets[0].created, fechaIni:this.tweets[this.tweets.length-1].created }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog result:", result);
+      if(result){
+        this.selector = result.picker;
+        
+      }
     });
   }
 
