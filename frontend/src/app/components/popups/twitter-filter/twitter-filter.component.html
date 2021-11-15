@@ -1,41 +1,42 @@
 <button mat-button mat-dialog-close>
     <mat-icon>close</mat-icon>
 </button>
-<h1 mat-dialog-title>Titulo de filtrar</h1>
+<h1 mat-dialog-title>Filter</h1>
 
 <div mat-dialog-content class="container" >
     <form #formulario="ngForm" fxFlex="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="row wrap">
         <div fxFlex="100" fxFlex.sm="100" fxFlex.xs="100" >
             <label>Pick the type of tweets you want to see: </label>
+            <br>
             <mat-radio-group name="pickerValueName" [(ngModel)]="pickerValue">
-                <mat-radio-button [checked]="1==data.picker" value="1">All</mat-radio-button>
-                <mat-radio-button [checked]="2==data.picker" value="2">Retweets</mat-radio-button>
-                <mat-radio-button [checked]="3==data.picker" value="3">Tweets</mat-radio-button>
-                <mat-radio-button [checked]="3==data.picker" value="4">Tweets & comments </mat-radio-button>
-                <mat-radio-button [checked]="3==data.picker" value="5">Tweets & retweets </mat-radio-button>
+                <mat-radio-button [checked]="1==data.picker" value="1" >All</mat-radio-button>
+                <mat-radio-button [checked]="2==data.picker" value="2">Tweets & comments </mat-radio-button>
+                <mat-radio-button [checked]="3==data.picker" value="3">Tweets & retweets </mat-radio-button>
+                <mat-radio-button [checked]="4==data.picker" value="4">Only tweets </mat-radio-button>
             </mat-radio-group>
         </div>
-        <mat-form-field appearance="outline" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap">
+        <br>
+        <mat-form-field  appearance="outline" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap">
             <mat-label>
                 From:
             </mat-label>
-            <input matInput readonly='true' 
+            <input required matInput readonly='true' 
                 [matDatepicker]="picker1" [min]="minDate" [max]="maxDate" [(ngModel)]="dateFrom" name="dateFrom" disabled >
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1 disabled="false"></mat-datepicker>
         </mat-form-field>        
 
         
-        <mat-form-field appearance="outline" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap" >
+        <mat-form-field  appearance="outline" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap" >
             <mat-label>
                 To:
             </mat-label>
-            <input matInput readonly='true' 
+            <input required matInput readonly='true' 
                 [matDatepicker]="picker2" [min]="minDate" [max]="maxDate" [(ngModel)]="dateTo" name="dateTo" disabled >
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2 disabled="false"></mat-datepicker>
         </mat-form-field>   
-        <button mat-button (click)="applyFilters()">Apply filters</button>
+        <button mat-raised-button (click)="applyFilters()">Apply filters</button>
     </form>
     
 

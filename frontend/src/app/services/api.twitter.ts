@@ -38,7 +38,7 @@ import { ApiResponse } from '../types/api';
                   'Access-Control-Allow-Methods': 'GET'}
         });
     }
-    obtenerTweets(username: any){
+    obtenerTweetsRetweets(username: any){
       return this.http.get<any>('http://localhost:3000/home_timeline/' + username,
       { headers: {'Access-Control-Allow-Origin': '*',
                   'Access-Control-Allow-Methods': 'GET'}

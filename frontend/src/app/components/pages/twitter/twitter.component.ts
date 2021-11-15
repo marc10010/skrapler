@@ -23,7 +23,9 @@ export class TwitterComponent implements OnInit {
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
   nombre: string= "";
-  selector= 5;
+  selector = 3;
+  dateFrom: Date = new Date();
+  dateTo: Date = new Date();
 
 
   constructor(
@@ -32,7 +34,7 @@ export class TwitterComponent implements OnInit {
   ) {   }
 
   ngOnInit(): void {
-    this.selector = 5;
+    this.selector = 3;
     
   }
 
@@ -54,33 +56,61 @@ export class TwitterComponent implements OnInit {
       console.log(this.infoUser);
     });
 
-    this.apiTwitter.obtenerTweets(this.nombre).subscribe(data=> {
-      /*this.tweets= data.map(((tweet: { created_at: any; id: any; full_text: any; id_str: string; retweet_count: any; favorite_count: any}) => ({
-        created : tweet.created_at,
-        id : tweet.id,
-        full_text : tweet.full_text,
-        id_str : tweet.id_str,
-        retweet_count : tweet.retweet_count,
-        favorite_count : tweet.favorite_count,
-      })));
-      */
+   this.obtenerTweetsRetweets();   
+  }
+
+  obtenerTweetsSolo(){
+    this.apiTwitter.obtenerTweetsSinRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
-      
+      this.tweetsOriginal = data
+    })
+  }
+
+  obtenerTweetsRetweets(){
+    this.apiTwitter.obtenerTweetsRetweets(this.nombre).subscribe(data=> {
+      this.tweets = data;
+      this.tweetsOriginal = data
     });
   }
 
+  obtenerTweetsComments(){
+    this.apiTwitter.obtenerTweetsComentarios(this.nombre).subscribe(data => {
+      this.tweets = data;
+      this.tweetsOriginal = data
+    })
+  }
+  
+  obtenerAll(){
+    this.apiTwitter.obtenerTweetsComentariosRetweets(this.nombre).subscribe(data => {
+      this.tweets = data;
+      this.tweetsOriginal = data
+    })
+  }
+
+
   openDialogFilter(){
+    const previousPicker = this.selector;
     const dialogRef = this.dialog.open(TwitterFilterComponent, {
-      width: '1000px',
-      height: '250px',
+      width: '580px',
+      height: '275px',
       
-      data: {picker: this.selector.toString(), fechaFin: this.tweets[0].created, fechaIni:this.tweets[this.tweets.length-1].created }
+      data: {picker: this.selector.toString(), fechaFin: this.tweets[0].created_at, fechaIni:this.tweets[this.tweets.length-1].created_at }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog result:", result);
       if(result){
         this.selector = result.picker;
+        this.dateFrom = result.DateFrom;
+        this.dateTo = result.DateTo;
+        if(this.selector != previousPicker){
+          if(this.selector==1) this.obtenerAll();
+          else if (this.selector==2) this.obtenerTweetsComments();
+          else if(this.selector==3)  this.obtenerTweetsRetweets();
+          else this.obtenerTweetsSolo();
+        }
+        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) );
         
+        console.log("done", this.tweets);
       }
     });
   }

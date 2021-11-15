@@ -41,7 +41,7 @@ app.get('/home_timeline_with_replies_nort/:user', (req,res)=>{
 })
 
 app.get('/home_timeline/:user', (req,res)=>{
-    const params = {screen_name: req.params.user, count: 200,  tweet_mode: 'extended', exclude_replies: false, include_rts: true };
+    const params = {screen_name: req.params.user, count: 200,  tweet_mode: 'extended', include_rts: true };
     apiClient.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) res.json(tweets);
         else res.json({error: error});
