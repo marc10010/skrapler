@@ -11,9 +11,11 @@
                 <mat-radio-button [checked]="1==data.picker" value="1">All</mat-radio-button>
                 <mat-radio-button [checked]="2==data.picker" value="2">Retweets</mat-radio-button>
                 <mat-radio-button [checked]="3==data.picker" value="3">Tweets</mat-radio-button>
+                <mat-radio-button [checked]="3==data.picker" value="4">Tweets & comments </mat-radio-button>
+                <mat-radio-button [checked]="3==data.picker" value="5">Tweets & retweets </mat-radio-button>
             </mat-radio-group>
         </div>
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap">
             <mat-label>
                 From:
             </mat-label>
@@ -24,7 +26,7 @@
         </mat-form-field>        
 
         
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap" >
             <mat-label>
                 To:
             </mat-label>

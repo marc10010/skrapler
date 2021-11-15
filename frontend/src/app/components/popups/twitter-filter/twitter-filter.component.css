@@ -4,8 +4,6 @@ button{
     right: 0;
 }
 .container {
-    width:1100px;
-    height: 700px;
     display: flex;
     flex-direction: row;
 }

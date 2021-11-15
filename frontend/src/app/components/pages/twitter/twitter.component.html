@@ -38,10 +38,11 @@
                 <mat-card-subtitle>@{{infoUser.username}}</mat-card-subtitle>
                 
                 <mat-card-content>
-                  <p>{{tweet.full_text}}</p>
+                  <p *ngIf="tweet.retweeted_status">RT: {{tweet.retweeted_status.full_text}}</p>
+                  <p *ngIf="!tweet.retweeted_status">{{tweet.full_text}}</p>
                   <button mat-raised-button  (click)=sayHi(tweet)>  Go to the Tweet </button>
                   <p style="text-align: end;"> 
-                      {{tweet.created | date: 'HH:mm dd-MM-yyyy'}}  
+                      {{tweet.created_at | date: 'HH:mm dd-MM-yyyy'}}  
                   </p>
                 </mat-card-content>
                 <mat-card-footer>

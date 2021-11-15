@@ -13,8 +13,35 @@ const apiClient = new Twitter({
     access_token_secret: 'gceONV7iSMDuBdHwbZJ5OrjLNKAoALIhKlUY6jiy045Ni' 
 });
 
+app.get('/home_timeline_nort/:user', (req,res)=>{
+    const params = {screen_name: req.params.user, count: 200,  tweet_mode: 'extended', include_rts:false };
+    apiClient.get('statuses/user_timeline', params, function (error, tweets, response) {
+        if (!error) res.json(tweets);
+        else res.json({error: error});
+        
+    });
+})
+
+app.get('/home_timeline_with_replies/:user', (req,res)=>{
+    const params = {screen_name: req.params.user, count: 200,  tweet_mode: 'extended', exclude_replies: false };
+    apiClient.get('statuses/user_timeline', params, function (error, tweets, response) {
+        if (!error) res.json(tweets);
+        else res.json({error: error});
+        
+    });
+})
+
+app.get('/home_timeline_with_replies_nort/:user', (req,res)=>{
+    const params = {screen_name: req.params.user, count: 200,  tweet_mode: 'extended', exclude_replies: false, include_rts:false };
+    apiClient.get('statuses/user_timeline', params, function (error, tweets, response) {
+        if (!error) res.json(tweets);
+        else res.json({error: error});
+        
+    });
+})
+
 app.get('/home_timeline/:user', (req,res)=>{
-    const params = {screen_name: req.params.user, count: 500,  tweet_mode: 'extended' };
+    const params = {screen_name: req.params.user, count: 200,  tweet_mode: 'extended', exclude_replies: false, include_rts: true };
     apiClient.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) res.json(tweets);
         else res.json({error: error});

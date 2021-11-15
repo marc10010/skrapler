@@ -20,10 +20,10 @@ export class TwitterComponent implements OnInit {
     image: "",
     verified: "",
   }
-  tweets: Tweets[]=[];
+  tweets: any[]= [];
   tweetsOriginal: any[]=[];
   nombre: string= "";
-  selector= 1;
+  selector= 5;
 
 
   constructor(
@@ -32,7 +32,7 @@ export class TwitterComponent implements OnInit {
   ) {   }
 
   ngOnInit(): void {
-    this.selector = 1;
+    this.selector = 5;
     
   }
 
@@ -55,7 +55,7 @@ export class TwitterComponent implements OnInit {
     });
 
     this.apiTwitter.obtenerTweets(this.nombre).subscribe(data=> {
-      this.tweets= data.map(((tweet: { created_at: any; id: any; full_text: any; id_str: string; retweet_count: any; favorite_count: any}) => ({
+      /*this.tweets= data.map(((tweet: { created_at: any; id: any; full_text: any; id_str: string; retweet_count: any; favorite_count: any}) => ({
         created : tweet.created_at,
         id : tweet.id,
         full_text : tweet.full_text,
@@ -63,13 +63,16 @@ export class TwitterComponent implements OnInit {
         retweet_count : tweet.retweet_count,
         favorite_count : tweet.favorite_count,
       })));
-      this.tweetsOriginal = data;
+      */
+      this.tweets = data;
       
     });
   }
 
   openDialogFilter(){
     const dialogRef = this.dialog.open(TwitterFilterComponent, {
+      width: '1000px',
+      height: '250px',
       
       data: {picker: this.selector.toString(), fechaFin: this.tweets[0].created, fechaIni:this.tweets[this.tweets.length-1].created }
     });

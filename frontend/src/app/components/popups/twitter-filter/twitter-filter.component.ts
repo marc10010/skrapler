@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./twitter-filter.component.css']
 })
 export class TwitterFilterComponent implements OnInit {
-  pickerValue: number = 1;
+  pickerValue: number = 5;
   
   constructor(
     public dialogRef: MatDialogRef<TwitterFilterComponent>,

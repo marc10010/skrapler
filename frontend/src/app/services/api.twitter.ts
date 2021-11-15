@@ -44,4 +44,25 @@ import { ApiResponse } from '../types/api';
                   'Access-Control-Allow-Methods': 'GET'}
         });
     }
+
+    obtenerTweetsSinRetweets(username: any){
+      return this.http.get<any>('http://localhost:3000/home_timeline_nort/' + username,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
+
+    obtenerTweetsComentarios(username: any){
+      return this.http.get<any>('http://localhost:3000/home_timeline_with_replies_nort/' + username,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
+
+    obtenerTweetsComentariosRetweets(username: any){
+      return this.http.get<any>('http://localhost:3000/home_timeline_with_replies/' + username,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
   }  
