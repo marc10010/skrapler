@@ -26,6 +26,7 @@ export class TwitterComponent implements OnInit {
   selector = 3;
   dateFrom: Date = new Date();
   dateTo: Date = new Date();
+  filterWord: string = "";
 
 
   constructor(
@@ -92,9 +93,9 @@ export class TwitterComponent implements OnInit {
     const previousPicker = this.selector;
     const dialogRef = this.dialog.open(TwitterFilterComponent, {
       width: '580px',
-      height: '275px',
+      height: '375px',
       
-      data: {picker: this.selector.toString(), fechaFin: this.tweets[0].created_at, fechaIni:this.tweets[this.tweets.length-1].created_at }
+      data: {picker: this.selector.toString(), fechaFin: this.tweetsOriginal[0].created_at, fechaIni:this.tweetsOriginal[this.tweetsOriginal.length-1].created_at, word: this.filterWord }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog result:", result);
@@ -102,13 +103,14 @@ export class TwitterComponent implements OnInit {
         this.selector = result.picker;
         this.dateFrom = result.DateFrom;
         this.dateTo = result.DateTo;
+        this.filterWord = result.word;
         if(this.selector != previousPicker){
           if(this.selector==1) this.obtenerAll();
           else if (this.selector==2) this.obtenerTweetsComments();
           else if(this.selector==3)  this.obtenerTweetsRetweets();
           else this.obtenerTweetsSolo();
         }
-        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) );
+        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) );
         
         console.log("done", this.tweets);
       }
