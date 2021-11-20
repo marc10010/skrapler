@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApiTwitter } from 'src/app/services/api.twitter';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-twitter',
@@ -46,6 +47,9 @@ export class TwitterComponent implements OnInit {
     window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
   }
   buscar(){
+
+    this.flush();
+    
     this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
       this.infoUser.name= data[0].name;
       this.infoUser.username= data[0].screen_name;
@@ -60,6 +64,25 @@ export class TwitterComponent implements OnInit {
    this.obtenerTweetsRetweets();   
   }
 
+  flush () {
+    //Reset values before subscribe
+    this.infoUser = { 
+      id: "",
+      username: "",
+      name: "",
+      description: "",
+      location: "",
+      image: "",
+      verified: "",
+    }
+    this.tweets = [];
+    this.tweetsOriginal = [];
+    this.selector = 3;
+    this.dateFrom =new Date();
+    this.dateTo = new Date();
+    this.filterWord = "";
+  }
+  
   obtenerTweetsSolo(){
     this.apiTwitter.obtenerTweetsSinRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
