@@ -40,10 +40,10 @@ export class TwitterComponent implements OnInit {
     
   }
 
-  openLink(){
+  openTwitter(){
     window.open("https://twitter.com/"+ this.infoUser.username)
   }
-  sayHi(tweet: Tweets){
+  openTweet(tweet: Tweets){
     window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
   }
   buscar(){

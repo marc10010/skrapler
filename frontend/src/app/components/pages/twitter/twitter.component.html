@@ -23,7 +23,7 @@
             <div fxFlex= "100" style="text-align: left;">description: {{infoUser.description}}</div>
             <div fxFlex= "100" style="text-align: left;">location: {{infoUser.location}}</div>
             <div fxFlex= "100" style="align-content: flex-end;">
-                <button *ngIf="tweets.length >0"  mat-raised-button (click) = "openLink()">Go to Twitter</button>
+                <button *ngIf="tweets.length >0"  mat-raised-button (click) = "openTwitter()">Go to Twitter</button>
             </div>     
         </div>
         <div  fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
@@ -39,9 +39,11 @@
                 <mat-card-subtitle>@{{infoUser.username}}</mat-card-subtitle>
                 
                 <mat-card-content>
-                  <p *ngIf="tweet.retweeted_status">RT: {{tweet.retweeted_status.full_text}}</p>
-                  <p *ngIf="!tweet.retweeted_status">{{tweet.full_text}}</p>
-                  <button mat-raised-button  (click)=sayHi(tweet)>  Go to the Tweet </button>
+                  <p class ="rt" *ngIf="tweet.retweeted_status && filterWord =='' "> {{tweet.retweeted_status.full_text}}</p>
+                  <p class ="rt" *ngIf="tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.retweeted_status.full_text | highlight : filterWord" ></p>
+                  <p *ngIf="!tweet.retweeted_status && filterWord =='' "> {{tweet.full_text}}</p>
+                  <p *ngIf="!tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.full_text | highlight : filterWord" ></p>
+                  <button mat-raised-button  (click)=openTweet(tweet)>  Go to the Tweet </button>
                   <p style="text-align: end;"> 
                       {{tweet.created_at | date: 'HH:mm dd-MM-yyyy'}}  
                   </p>
