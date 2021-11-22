@@ -133,10 +133,23 @@ export class TwitterComponent implements OnInit {
           else if(this.selector==3)  this.obtenerTweetsRetweets();
           else this.obtenerTweetsSolo();
         }
-        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) );
+        console.log("test", this.tweetsOriginal[1].retweeted_status, this.tweetsOriginal[1].retweeted_status==undefined)
+        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) ) ) );
         
+        this.frequencyWords();
+
         console.log("done", this.tweets);
       }
+    });
+  }
+
+  frequencyWords(){
+    let i = 0;
+    this.tweets.forEach(tweet => {
+      let word = "";
+      if(tweet.retweeted_status) word = tweet.retweeted_status.full_text.split(' ').slice(0,-1);
+      else word = tweet.full_text.split(' ').slice(0,-1);
+      
     });
   }
 
