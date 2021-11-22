@@ -43,10 +43,19 @@
                   <p class ="rt" *ngIf="tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.retweeted_status.full_text | highlight : filterWord" ></p>
                   <p *ngIf="!tweet.retweeted_status && filterWord =='' "> {{tweet.full_text}}</p>
                   <p *ngIf="!tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.full_text | highlight : filterWord" ></p>
+                
+                  <div  *ngIf="!tweet.retweeted_status && tweet.entities.media">    
+                    <img  class="tweet_img" src={{tweet.entities.media[0].media_url}}/>
+                  </div>
+                  
+                  <div  *ngIf="tweet.retweeted_status && tweet.retweeted_status.entities.media">    
+                    <img  class="tweet_img" src={{tweet.retweeted_status.entities.media[0].media_url}}/>
+                  </div>             
                   <button mat-raised-button  (click)=openTweet(tweet)>  Go to the Tweet </button>
                   <p style="text-align: end;"> 
                       {{tweet.created_at | date: 'HH:mm dd-MM-yyyy'}}  
                   </p>
+
                 </mat-card-content>
                 <mat-card-footer>
                     <p>Retweets: {{tweet.retweet_count}}</p>
