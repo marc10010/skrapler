@@ -12,6 +12,7 @@ import { TwitterComponent } from './components/pages/twitter/twitter.component';
 import { FacebookComponent } from './components/pages/facebook/facebook.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TwitterFilterComponent } from './components/popups/twitter-filter/twitter-filter.component';
+import { HighlightPipe } from './components/pipes/highlight.pipe';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { TwitterFilterComponent } from './components/popups/twitter-filter/twitt
     HeaderComponent,
     TwitterComponent,
     FacebookComponent,
-    TwitterFilterComponent
+    TwitterFilterComponent,
+    HighlightPipe
   ],
   imports: [
     BrowserModule,
