@@ -39,7 +39,7 @@
                 <mat-card-subtitle>@{{infoUser.username}}</mat-card-subtitle>
                 
                 <mat-card-content>
-                  <p class ="rt" *ngIf="tweet.retweeted_status && filterWord =='' "> {{tweet.retweeted_status.full_text}}</p>
+                  <p class ="rt" *ngIf="tweet.retweeted_status && filterWord =='' ">{{tweet.retweeted_status.full_text}}</p>
                   <p class ="rt" *ngIf="tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.retweeted_status.full_text | highlight : filterWord" ></p>
                   <p *ngIf="!tweet.retweeted_status && filterWord =='' "> {{tweet.full_text}}</p>
                   <p *ngIf="!tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.full_text | highlight : filterWord" ></p>
