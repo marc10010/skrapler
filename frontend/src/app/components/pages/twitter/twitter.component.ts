@@ -32,13 +32,13 @@ export class TwitterComponent implements OnInit {
   dateFrom: Date = new Date();
   dateTo: Date = new Date();
   filterWord: string = "";
+  popUpOpened: number = 0;
 
 
   constructor(
     private apiTwitter: ApiTwitter,
     public dialog: MatDialog,
   ) { 
-    this.dictWords = new Map <string, number>([["", 0]]);
   }
 
   ngOnInit(): void {
@@ -97,6 +97,7 @@ export class TwitterComponent implements OnInit {
     this.apiTwitter.obtenerTweetsSinRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
       this.tweetsOriginal = data;
+      this.filter();
     })
   }
 
@@ -104,7 +105,7 @@ export class TwitterComponent implements OnInit {
     this.apiTwitter.obtenerTweetsRetweets(this.nombre).subscribe(data=> {
       this.tweets = data;
       this.tweetsOriginal = data;
-      this.frequencyWords();
+      this.filter();
     });
   }
 
@@ -112,6 +113,7 @@ export class TwitterComponent implements OnInit {
     this.apiTwitter.obtenerTweetsComentarios(this.nombre).subscribe(data => {
       this.tweets = data;
       this.tweetsOriginal = data;
+      this.filter();
     })
   }
   
@@ -119,6 +121,7 @@ export class TwitterComponent implements OnInit {
     this.apiTwitter.obtenerTweetsComentariosRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
       this.tweetsOriginal = data;
+      this.filter();
     })
   }
 
@@ -134,6 +137,7 @@ export class TwitterComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog result:", result);
       if(result){
+        this.popUpOpened = 1;
         this.selector = result.picker;
         this.dateFrom = result.DateFrom;
         this.dateTo = result.DateTo;
@@ -144,19 +148,22 @@ export class TwitterComponent implements OnInit {
           else if(this.selector==3)  this.obtenerTweetsRetweets();
           else this.obtenerTweetsSolo();
         }
-        console.log("test", this.tweetsOriginal[1].retweeted_status, this.tweetsOriginal[1].retweeted_status==undefined)
-        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) ) ) );
-        
-        this.frequencyWords();
-
-        console.log("done", this.tweets);
+        this.filter();
       }
     });
   }
 
+  filter(){
+    if(this.popUpOpened == 1){
+      this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) ) ) );    
+      this.popUpOpened = 0;
+      console.log("done", this.tweets);
+    }    
+    this.frequencyWords();
+  }
+
   frequencyWords(){
-    console.log("hi");
-    let i = 0;
+    let bannedWords = ['the', 'for', 'a', 'at', 'is', 'in', "it's", 'of'];
     this.dictWords= new Map<string, number>();
     if(this.tweets.length>0){
       this.tweets.forEach(tweet => {
@@ -164,11 +171,13 @@ export class TwitterComponent implements OnInit {
         if(tweet.retweeted_status) word = tweet.retweeted_status.full_text.split(' ').slice(0,-1);
         else word = tweet.full_text.split(' ').slice(0,-1);
         for(let i=0 ; i< word.length; ++i){
-          if( this.dictWords.has(word[i]) ){
-            this.dictWords.set(word[i], (this.dictWords.get(word[i]) + 1) );
+          //si la paraula no esta en la llista de paraules banegades
+          if(! bannedWords.includes(word[i].toLowerCase())){
+            if( this.dictWords.has(word[i].toLowerCase()) ){
+              this.dictWords.set(word[i].toLowerCase(), (this.dictWords.get(word[i].toLowerCase()) + 1) );
+            }
+            else this.dictWords.set(word[i].toLowerCase(), 1);
           }
-          else this.dictWords.set(word[i], 1);
-          
         }
           
       });
@@ -176,5 +185,4 @@ export class TwitterComponent implements OnInit {
       console.log(this.dictWords);
     }
   }
-
 }
