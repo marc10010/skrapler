@@ -4,6 +4,7 @@ import { ApiTwitter } from 'src/app/services/api.twitter';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
 import { flush } from '@angular/core/testing';
+import { DictWordFrequency } from 'src/app/types/global';
 
 @Component({
   selector: 'app-twitter',
@@ -21,6 +22,9 @@ export class TwitterComponent implements OnInit {
     image: "",
     verified: "",
   }
+
+  dictWords: any = "" ;
+
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
   nombre: string= "";
@@ -33,10 +37,13 @@ export class TwitterComponent implements OnInit {
   constructor(
     private apiTwitter: ApiTwitter,
     public dialog: MatDialog,
-  ) {   }
+  ) { 
+    this.dictWords = new Map <string, number>([["", 0]]);
+  }
 
   ngOnInit(): void {
     this.selector = 3;
+    //this.dictWords = new Map<string, number>();
     
   }
 
@@ -51,17 +58,19 @@ export class TwitterComponent implements OnInit {
     this.flush();
     
     this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
-      this.infoUser.name= data[0].name;
-      this.infoUser.username= data[0].screen_name;
-      this.infoUser.description= data[0].description;
-      this.infoUser.id = data[0].id;
-      this.infoUser.location = data[0].location;
-      this.infoUser.image = data[0].profile_image_url_https;
-      this.infoUser.verified = data[0].verified;
-      console.log(this.infoUser);
-    });
+      if(data.length>0){
+        this.infoUser.name= data[0].name;
+        this.infoUser.username= data[0].screen_name;
+        this.infoUser.description= data[0].description;
+        this.infoUser.id = data[0].id;
+        this.infoUser.location = data[0].location;
+        this.infoUser.image = data[0].profile_image_url_https;
+        this.infoUser.verified = data[0].verified;
+        console.log(this.infoUser);
 
-   this.obtenerTweetsRetweets();   
+        this.obtenerTweetsRetweets();
+      }
+    }); 
   }
 
   flush () {
@@ -81,33 +90,35 @@ export class TwitterComponent implements OnInit {
     this.dateFrom =new Date();
     this.dateTo = new Date();
     this.filterWord = "";
+    this.dictWords = [];
   }
   
   obtenerTweetsSolo(){
     this.apiTwitter.obtenerTweetsSinRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
     })
   }
 
   obtenerTweetsRetweets(){
     this.apiTwitter.obtenerTweetsRetweets(this.nombre).subscribe(data=> {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
+      this.frequencyWords();
     });
   }
 
   obtenerTweetsComments(){
     this.apiTwitter.obtenerTweetsComentarios(this.nombre).subscribe(data => {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
     })
   }
   
   obtenerAll(){
     this.apiTwitter.obtenerTweetsComentariosRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
     })
   }
 
@@ -144,13 +155,26 @@ export class TwitterComponent implements OnInit {
   }
 
   frequencyWords(){
+    console.log("hi");
     let i = 0;
-    this.tweets.forEach(tweet => {
-      let word = "";
-      if(tweet.retweeted_status) word = tweet.retweeted_status.full_text.split(' ').slice(0,-1);
-      else word = tweet.full_text.split(' ').slice(0,-1);
-      
-    });
+    this.dictWords= new Map<string, number>();
+    if(this.tweets.length>0){
+      this.tweets.forEach(tweet => {
+        let word = "";
+        if(tweet.retweeted_status) word = tweet.retweeted_status.full_text.split(' ').slice(0,-1);
+        else word = tweet.full_text.split(' ').slice(0,-1);
+        for(let i=0 ; i< word.length; ++i){
+          if( this.dictWords.has(word[i]) ){
+            this.dictWords.set(word[i], (this.dictWords.get(word[i]) + 1) );
+          }
+          else this.dictWords.set(word[i], 1);
+          
+        }
+          
+      });
+      this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
+      console.log(this.dictWords);
+    }
   }
 
 }
