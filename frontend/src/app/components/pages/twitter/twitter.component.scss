@@ -3,7 +3,12 @@
     padding: 10px 30px;
 }
 div.mapa{
-    height: 100%;
+    height: calc(100%);
+}
+
+div.mapa2{
+    height: calc(100%);
+    overflow: scroll;
 }
 div.info{
     height: 100%;

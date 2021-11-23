@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApiTwitter } from 'src/app/services/api.twitter';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
-import { flush } from '@angular/core/testing';
-import { DictWordFrequency } from 'src/app/types/global';
+import { Chart } from 'angular-highcharts';
+
 
 @Component({
   selector: 'app-twitter',
@@ -12,6 +12,51 @@ import { DictWordFrequency } from 'src/app/types/global';
   styleUrls: ['./twitter.component.scss']
 })
 export class TwitterComponent implements OnInit {
+
+  
+  chart = new Chart({
+    chart: {     
+      type: 'packedbubble',
+      height: '100%',
+    },
+    title: {
+      text: 'Simple packed bubble'
+    },
+    tooltip: {
+        useHTML: true,
+        pointFormat: '<b>{point.name}:</b> {point.y}</sub>'
+    },
+    plotOptions: {
+        packedbubble: {
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                style: {
+                    color: 'black',
+                    textOutline: 'none',
+                    fontWeight: 'normal'
+                }
+            },
+        }
+      },
+  series: [{
+    name: 'Coffee', 
+    type: 'packedbubble',
+    data: [{
+        value: 12,
+        name: 'Bert'
+    }, {
+        value: 5,
+        name: 'John'
+    }, {
+        value: 10,
+        name: 'Sandra'
+    }, {
+        value: 7,
+        name: 'Cecile'
+    }]
+  }]
+});
 
   infoUser = {
     id: "",
