@@ -1,7 +1,9 @@
 const express = require("express");
 const Twitter = require("twit");
 const cors = require("cors");
-
+const {MONGODB} = require("./config.js");
+const mongoose = require('mongoose');
+const Blacklist = require("./models/Blacklist");
 
 const app = express();
 
@@ -58,5 +60,18 @@ app.get('/search/:user', (req,res)=>{
     });
 })
 
+mongoose 
+  .connect(MONGODB, { useNewUrlParser: true,userUnifiedTopology: true})
+  .then(() => {
+    console.log('MongoDB Connected');
+    return app.listen({ port: 3000 }, "0.0.0.0");
+  })
+  .then((res) => {
+      console.log(`Server running at ${res.url}`);
+  })
+//app.listen(3000, ()=> console.log("running server"))
 
-app.listen(3000, ()=> console.log("running server"))
+
+
+//To define CRUD endpoints. The idea is to let the client (frontend) create, read, update and delete blacklisted words. To do so different
+//endpoints are required.
