@@ -228,6 +228,15 @@ export class TwitterComponent implements OnInit {
       });
       this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
       console.log(this.dictWords);
+      //this.dictWords = Object.fromEntries(this.dictWords)
+      let jsonObject = JSON.stringify([... this.dictWords])
+      /*this.dictWords.forEach((value, key) => {
+        jsonObject[key] = value
+    });
+    */
+      console.log(jsonObject);
     }
   }
+
+
 }
