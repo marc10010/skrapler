@@ -12,7 +12,10 @@ import { TwitterComponent } from './components/pages/twitter/twitter.component';
 import { FacebookComponent } from './components/pages/facebook/facebook.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TwitterFilterComponent } from './components/popups/twitter-filter/twitter-filter.component';
-
+import { HighlightPipe } from './components/pipes/highlight.pipe';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import * as more from 'highcharts/highcharts-more.src';
+import * as exporting from 'highcharts/modules/exporting.src';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { TwitterFilterComponent } from './components/popups/twitter-filter/twitt
     HeaderComponent,
     TwitterComponent,
     FacebookComponent,
-    TwitterFilterComponent
+    TwitterFilterComponent,
+    HighlightPipe
   ],
   imports: [
     BrowserModule,
@@ -30,8 +34,9 @@ import { TwitterFilterComponent } from './components/popups/twitter-filter/twitt
     HttpClientModule,
     FlexLayoutModule,
     MatDialogModule,
+    ChartModule,
   ],
-  providers: [],
+  providers: [ { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

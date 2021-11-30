@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApiTwitter } from 'src/app/services/api.twitter';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
+import { Chart } from 'angular-highcharts';
+
 
 @Component({
   selector: 'app-twitter',
@@ -10,6 +12,51 @@ import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter
   styleUrls: ['./twitter.component.scss']
 })
 export class TwitterComponent implements OnInit {
+
+  
+  chart = new Chart({
+    chart: {     
+      type: 'packedbubble',
+      height: '100%',
+    },
+    title: {
+      text: 'Simple packed bubble'
+    },
+    tooltip: {
+        useHTML: true,
+        pointFormat: '<b>{point.name}:</b> {point.y}</sub>'
+    },
+    plotOptions: {
+        packedbubble: {
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                style: {
+                    color: 'black',
+                    textOutline: 'none',
+                    fontWeight: 'normal'
+                }
+            },
+        }
+      },
+  series: [{
+    name: 'Coffee', 
+    type: 'packedbubble',
+    data: [{
+        value: 12,
+        name: 'Bert'
+    }, {
+        value: 5,
+        name: 'John'
+    }, {
+        value: 10,
+        name: 'Sandra'
+    }, {
+        value: 7,
+        name: 'Cecile'
+    }]
+  }]
+});
 
   infoUser = {
     id: "",
@@ -20,6 +67,9 @@ export class TwitterComponent implements OnInit {
     image: "",
     verified: "",
   }
+
+  dictWords: any = "" ;
+
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
   nombre: string= "";
@@ -27,64 +77,96 @@ export class TwitterComponent implements OnInit {
   dateFrom: Date = new Date();
   dateTo: Date = new Date();
   filterWord: string = "";
+  popUpOpened: number = 0;
 
 
   constructor(
     private apiTwitter: ApiTwitter,
     public dialog: MatDialog,
-  ) {   }
+  ) { 
+  }
 
   ngOnInit(): void {
     this.selector = 3;
+    //this.dictWords = new Map<string, number>();
     
   }
 
-  openLink(){
+  openTwitter(){
     window.open("https://twitter.com/"+ this.infoUser.username)
   }
-  sayHi(tweet: Tweets){
+  openTweet(tweet: Tweets){
     window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
   }
   buscar(){
-    this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
-      this.infoUser.name= data[0].name;
-      this.infoUser.username= data[0].screen_name;
-      this.infoUser.description= data[0].description;
-      this.infoUser.id = data[0].id;
-      this.infoUser.location = data[0].location;
-      this.infoUser.image = data[0].profile_image_url_https;
-      this.infoUser.verified = data[0].verified;
-      console.log(this.infoUser);
-    });
 
-   this.obtenerTweetsRetweets();   
+    this.flush();
+    
+    this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
+      if(data.length>0){
+        this.infoUser.name= data[0].name;
+        this.infoUser.username= data[0].screen_name;
+        this.infoUser.description= data[0].description;
+        this.infoUser.id = data[0].id;
+        this.infoUser.location = data[0].location;
+        this.infoUser.image = data[0].profile_image_url_https;
+        this.infoUser.verified = data[0].verified;
+        console.log(this.infoUser);
+
+        this.obtenerTweetsRetweets();
+      }
+    }); 
   }
 
+  flush () {
+    //Reset values before subscribe
+    this.infoUser = { 
+      id: "",
+      username: "",
+      name: "",
+      description: "",
+      location: "",
+      image: "",
+      verified: "",
+    }
+    this.tweets = [];
+    this.tweetsOriginal = [];
+    this.selector = 3;
+    this.dateFrom =new Date();
+    this.dateTo = new Date();
+    this.filterWord = "";
+    this.dictWords = [];
+  }
+  
   obtenerTweetsSolo(){
     this.apiTwitter.obtenerTweetsSinRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
+      this.filter();
     })
   }
 
   obtenerTweetsRetweets(){
     this.apiTwitter.obtenerTweetsRetweets(this.nombre).subscribe(data=> {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
+      this.filter();
     });
   }
 
   obtenerTweetsComments(){
     this.apiTwitter.obtenerTweetsComentarios(this.nombre).subscribe(data => {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
+      this.filter();
     })
   }
   
   obtenerAll(){
     this.apiTwitter.obtenerTweetsComentariosRetweets(this.nombre).subscribe(data => {
       this.tweets = data;
-      this.tweetsOriginal = data
+      this.tweetsOriginal = data;
+      this.filter();
     })
   }
 
@@ -100,6 +182,7 @@ export class TwitterComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog result:", result);
       if(result){
+        this.popUpOpened = 1;
         this.selector = result.picker;
         this.dateFrom = result.DateFrom;
         this.dateTo = result.DateTo;
@@ -110,11 +193,41 @@ export class TwitterComponent implements OnInit {
           else if(this.selector==3)  this.obtenerTweetsRetweets();
           else this.obtenerTweetsSolo();
         }
-        this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) );
-        
-        console.log("done", this.tweets);
+        this.filter();
       }
     });
   }
 
+  filter(){
+    if(this.popUpOpened == 1){
+      this.tweets = this.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= this.dateTo && new Date(tweet.created_at) >= this.dateFrom) && ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(this.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(this.filterWord.toLowerCase()) ) ) );    
+      this.popUpOpened = 0;
+      console.log("done", this.tweets);
+    }    
+    this.frequencyWords();
+  }
+
+  frequencyWords(){
+    let bannedWords = ['the', 'for', 'a', 'at', 'is', 'in', "it's", 'of'];
+    this.dictWords= new Map<string, number>();
+    if(this.tweets.length>0){
+      this.tweets.forEach(tweet => {
+        let word = "";
+        if(tweet.retweeted_status) word = tweet.retweeted_status.full_text.split(' ').slice(0,-1);
+        else word = tweet.full_text.split(' ').slice(0,-1);
+        for(let i=0 ; i< word.length; ++i){
+          //si la paraula no esta en la llista de paraules banegades
+          if(! bannedWords.includes(word[i].toLowerCase())){
+            if( this.dictWords.has(word[i].toLowerCase()) ){
+              this.dictWords.set(word[i].toLowerCase(), (this.dictWords.get(word[i].toLowerCase()) + 1) );
+            }
+            else this.dictWords.set(word[i].toLowerCase(), 1);
+          }
+        }
+          
+      });
+      this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
+      console.log(this.dictWords);
+    }
+  }
 }

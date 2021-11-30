@@ -3,7 +3,12 @@
     padding: 10px 30px;
 }
 div.mapa{
-    height: 100%;
+    height: calc(100%);
+}
+
+div.mapa2{
+    height: calc(100%);
+    overflow: scroll;
 }
 div.info{
     height: 100%;
@@ -18,4 +23,13 @@ div.info{
     border-radius: 5px;
     border-color: blue;
     margin-top: 10px;
+}
+
+.rt{
+    font-style: italic;
+  
+}
+
+.tweet_img{
+    width: 400px;
 }
