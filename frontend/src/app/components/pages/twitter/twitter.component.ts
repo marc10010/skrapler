@@ -245,6 +245,7 @@ export class TwitterComponent implements OnInit {
           
       });
       this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
+<<<<<<< HEAD
       this.dictWordsArroba = new Map([...this.dictWordsArroba.entries()].sort((a, b) => b[1] - a[1]));
       this.dictWordsHashtag = new Map([...this.dictWordsHashtag.entries()].sort((a, b) => b[1] - a[1]));
       
@@ -282,6 +283,16 @@ export class TwitterComponent implements OnInit {
 
       
       
+=======
+      console.log(this.dictWords);
+      //this.dictWords = Object.fromEntries(this.dictWords)
+      let jsonObject = JSON.stringify([... this.dictWords])
+      /*this.dictWords.forEach((value, key) => {
+        jsonObject[key] = value
+    });
+    */
+      console.log(jsonObject);
+>>>>>>> c81dab2c75350e5be27e55d5f707d351e3d2a5ca
     }
   }
 
