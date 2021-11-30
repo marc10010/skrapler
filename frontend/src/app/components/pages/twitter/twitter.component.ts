@@ -4,6 +4,7 @@ import { ApiTwitter } from 'src/app/services/api.twitter';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
 import { Chart } from 'angular-highcharts';
+import { SeriesOptionsType } from 'highcharts';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Chart } from 'angular-highcharts';
   styleUrls: ['./twitter.component.scss']
 })
 export class TwitterComponent implements OnInit {
-
+  jsonObject = {};
   
   chart = new Chart({
     chart: {     
@@ -34,29 +35,18 @@ export class TwitterComponent implements OnInit {
                 style: {
                     color: 'black',
                     textOutline: 'none',
-                    fontWeight: 'normal'
+                    fontWeight: 'normal',
+                    fontSize: '18px'
                 }
             },
         }
       },
-  series: [{
-    name: 'Coffee', 
-    type: 'packedbubble',
-    data: [{
-        value: 12,
-        name: 'Bert'
-    }, {
-        value: 5,
-        name: 'John'
-    }, {
-        value: 10,
-        name: 'Sandra'
-    }, {
-        value: 7,
-        name: 'Cecile'
+    series: [{
+      name: 'Coffee', 
+      type: 'packedbubble',
+      data: this.jsonObject
     }]
-  }]
-});
+  });
 
   infoUser = {
     id: "",
@@ -71,7 +61,7 @@ export class TwitterComponent implements OnInit {
   dictWords: any = "" ;
   dictWordsArroba: any = "" ;
   dictWordsHashtag: any = "" ;
-
+  
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
   nombre: string= "";
@@ -89,9 +79,7 @@ export class TwitterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selector = 3;
-    //this.dictWords = new Map<string, number>();
-    
+    this.selector = 3;  
   }
 
   openTwitter(){
@@ -137,6 +125,10 @@ export class TwitterComponent implements OnInit {
     this.dateFrom =new Date();
     this.dateTo = new Date();
     this.filterWord = "";
+    console.log("chart",this.chart);
+    this.chart.removeSeries(0);
+    this.chart.removeSeries(1);
+    this.chart.removeSeries(2);
     this.dictWords = [];
     this.dictWordsArroba = [];
     this.dictWordsHashtag = [];
@@ -208,12 +200,15 @@ export class TwitterComponent implements OnInit {
       this.popUpOpened = 0;
       console.log("done", this.tweets);
     }    
+    console.log("freq")
     this.frequencyWords();
   }
 
   frequencyWords(){
     let bannedWords = ['the', 'for', 'a', 'at', 'is', 'in', "it's", 'of'];
     this.dictWords= new Map<string, number>();
+    this.dictWordsArroba= new Map<string, number>();
+    this.dictWordsHashtag= new Map<string, number>();
     if(this.tweets.length>0){
       this.tweets.forEach(tweet => {
         let word = "";
@@ -222,20 +217,23 @@ export class TwitterComponent implements OnInit {
         for(let i=0 ; i< word.length; ++i){
           //si la paraula no esta en la llista de paraules banegades
           if(! bannedWords.includes(word[i].toLowerCase())){
+            //arrobas
             if(word[i].toLowerCase()[0]=="@"){
               if( this.dictWordsArroba.has(word[i].toLowerCase()) ){
                 this.dictWordsArroba.set(word[i].toLowerCase(), (this.dictWordsArroba.get(word[i].toLowerCase()) + 1) );
               }
-              else this.dictWords.set(word[i].toLowerCase(), 1);
+              else this.dictWordsArroba.set(word[i].toLowerCase(), 1);
             }
+            //hastags
             else if(word[i].toLowerCase()[0]=="#"){
 
               if( this.dictWordsHashtag.has(word[i].toLowerCase()) ){
                 this.dictWordsHashtag.set(word[i].toLowerCase(), (this.dictWordsHashtag.get(word[i].toLowerCase()) + 1) );
               }
-              else this.dictWords.set(word[i].toLowerCase(), 1);
+              else this.dictWordsHashtag.set(word[i].toLowerCase(), 1);
             }
             else{
+              
               if( this.dictWords.has(word[i].toLowerCase()) ){
                 this.dictWords.set(word[i].toLowerCase(), (this.dictWords.get(word[i].toLowerCase()) + 1) );
               }
@@ -249,7 +247,43 @@ export class TwitterComponent implements OnInit {
       this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
       this.dictWordsArroba = new Map([...this.dictWordsArroba.entries()].sort((a, b) => b[1] - a[1]));
       this.dictWordsHashtag = new Map([...this.dictWordsHashtag.entries()].sort((a, b) => b[1] - a[1]));
+      
+      
+      let array = Array.from(this.dictWords, ([name, value]) => ({ name, value }));
+      let jsonObject2  =array.slice(0,15);
 
+      array = Array.from(this.dictWordsArroba, ([name, value]) => ({ name, value }));
+      let jsonObject3  =array.slice(0,15);
+      array = Array.from(this.dictWordsHashtag, ([name, value]) => ({ name, value }));
+      let jsonObject4  =array.slice(0,15);
+
+
+
+      this.chart.addSeries({
+        type: 'packedbubble',
+        name: "Words",
+        data: jsonObject2,
+        index: 1,
+        }, true, true);
+
+      this.chart.addSeries({
+        type: 'packedbubble',
+        name: "Arrobas",
+        data: jsonObject3,
+        index: 2,
+        }, true, true);
+
+      this.chart.addSeries({
+        type: 'packedbubble',
+        name: "Hastags",
+        data: jsonObject4,
+        index: 3,
+       }, true, true);
+
+      
+      
     }
   }
+
+
 }

@@ -74,4 +74,4 @@ mongoose
 
 
 //To define CRUD endpoints. The idea is to let the client (frontend) create, read, update and delete blacklisted words. To do so different
-//endpoints are required.
+//endpoints are required. 
