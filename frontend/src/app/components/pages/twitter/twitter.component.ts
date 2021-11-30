@@ -69,6 +69,8 @@ export class TwitterComponent implements OnInit {
   }
 
   dictWords: any = "" ;
+  dictWordsArroba: any = "" ;
+  dictWordsHashtag: any = "" ;
 
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
@@ -136,6 +138,8 @@ export class TwitterComponent implements OnInit {
     this.dateTo = new Date();
     this.filterWord = "";
     this.dictWords = [];
+    this.dictWordsArroba = [];
+    this.dictWordsHashtag = [];
   }
   
   obtenerTweetsSolo(){
@@ -218,16 +222,34 @@ export class TwitterComponent implements OnInit {
         for(let i=0 ; i< word.length; ++i){
           //si la paraula no esta en la llista de paraules banegades
           if(! bannedWords.includes(word[i].toLowerCase())){
-            if( this.dictWords.has(word[i].toLowerCase()) ){
-              this.dictWords.set(word[i].toLowerCase(), (this.dictWords.get(word[i].toLowerCase()) + 1) );
+            if(word[i].toLowerCase()[0]=="@"){
+              if( this.dictWordsArroba.has(word[i].toLowerCase()) ){
+                this.dictWordsArroba.set(word[i].toLowerCase(), (this.dictWordsArroba.get(word[i].toLowerCase()) + 1) );
+              }
+              else this.dictWords.set(word[i].toLowerCase(), 1);
             }
-            else this.dictWords.set(word[i].toLowerCase(), 1);
+            else if(word[i].toLowerCase()[0]=="#"){
+
+              if( this.dictWordsHashtag.has(word[i].toLowerCase()) ){
+                this.dictWordsHashtag.set(word[i].toLowerCase(), (this.dictWordsHashtag.get(word[i].toLowerCase()) + 1) );
+              }
+              else this.dictWords.set(word[i].toLowerCase(), 1);
+            }
+            else{
+              if( this.dictWords.has(word[i].toLowerCase()) ){
+                this.dictWords.set(word[i].toLowerCase(), (this.dictWords.get(word[i].toLowerCase()) + 1) );
+              }
+              else this.dictWords.set(word[i].toLowerCase(), 1);
+            }
+            
           }
         }
           
       });
       this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
-      console.log(this.dictWords);
+      this.dictWordsArroba = new Map([...this.dictWordsArroba.entries()].sort((a, b) => b[1] - a[1]));
+      this.dictWordsHashtag = new Map([...this.dictWordsHashtag.entries()].sort((a, b) => b[1] - a[1]));
+
     }
   }
 }

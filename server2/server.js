@@ -61,7 +61,7 @@ app.get('/search/:user', (req,res)=>{
 })
 
 mongoose 
-  .connect(MONGODB, { useNewUrlParser: true,userUnifiedTopology: true})
+  .connect(MONGODB)
   .then(() => {
     console.log('MongoDB Connected');
     return app.listen({ port: 3000 }, "0.0.0.0");
