@@ -5,6 +5,8 @@ import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
 import { Chart } from 'angular-highcharts';
 import { SeriesOptionsType } from 'highcharts';
+import { flush } from '@angular/core/testing';
+import { ArrayType } from '@angular/compiler';
 
 
 @Component({
@@ -13,22 +15,35 @@ import { SeriesOptionsType } from 'highcharts';
   styleUrls: ['./twitter.component.scss']
 })
 export class TwitterComponent implements OnInit {
-  jsonObject = {};
-  
+  jsonObject_words = {};
+  jsonObject_arrobas = {};
+  jsonObject_hastags = {};
+
   chart = new Chart({
     chart: {     
       type: 'packedbubble',
-      height: '100%',
+      height: '80%'
     },
     title: {
-      text: 'Simple packed bubble'
+      text: 'Frequent Words'
     },
     tooltip: {
         useHTML: true,
-        pointFormat: '<b>{point.name}:</b> {point.y}</sub>'
+        pointFormat: '<b>{point.name}:</b> {point.value}</sub>'
     },
     plotOptions: {
         packedbubble: {
+            draggable: false,
+            allowPointSelect: true,
+            minSize: '40%',
+            maxSize: '100%',
+            layoutAlgorithm: {
+                gravitationalConstant: 0.05,
+                splitSeries: "true",
+                seriesInteraction: false,
+                dragBetweenSeries: true,
+                parentNodeLimit: true
+            },
             dataLabels: {
                 enabled: true,
                 format: '{point.name}',
@@ -39,13 +54,9 @@ export class TwitterComponent implements OnInit {
                     fontSize: '18px'
                 }
             },
-        }
+        },
       },
-    series: [{
-      name: 'Coffee', 
-      type: 'packedbubble',
-      data: this.jsonObject
-    }]
+    series: []
   });
 
   infoUser = {
@@ -126,9 +137,9 @@ export class TwitterComponent implements OnInit {
     this.dateTo = new Date();
     this.filterWord = "";
     console.log("chart",this.chart);
-    this.chart.removeSeries(0);
-    this.chart.removeSeries(1);
     this.chart.removeSeries(2);
+    this.chart.removeSeries(1);
+    this.chart.removeSeries(0);
     this.dictWords = [];
     this.dictWordsArroba = [];
     this.dictWordsHashtag = [];
@@ -244,46 +255,49 @@ export class TwitterComponent implements OnInit {
         }
           
       });
+
       this.dictWords = new Map([...this.dictWords.entries()].sort((a, b) => b[1] - a[1]));
       this.dictWordsArroba = new Map([...this.dictWordsArroba.entries()].sort((a, b) => b[1] - a[1]));
       this.dictWordsHashtag = new Map([...this.dictWordsHashtag.entries()].sort((a, b) => b[1] - a[1]));
       
       
       let array = Array.from(this.dictWords, ([name, value]) => ({ name, value }));
-      let jsonObject2  =array.slice(0,15);
+      this.jsonObject_words  =array.slice(0,15);
 
       array = Array.from(this.dictWordsArroba, ([name, value]) => ({ name, value }));
-      let jsonObject3  =array.slice(0,15);
+      this.jsonObject_arrobas  =array.slice(0,15);
       array = Array.from(this.dictWordsHashtag, ([name, value]) => ({ name, value }));
-      let jsonObject4  =array.slice(0,15);
+      this.jsonObject_hastags  =array.slice(0,15);
 
 
-
+        
       this.chart.addSeries({
         type: 'packedbubble',
         name: "Words",
-        data: jsonObject2,
-        index: 1,
+        data: this.jsonObject_words,
+        index: 0,
+        colorIndex: 5
         }, true, true);
 
       this.chart.addSeries({
         type: 'packedbubble',
         name: "Arrobas",
-        data: jsonObject3,
-        index: 2,
+        data: this.jsonObject_arrobas,
+        index: 1,
+        colorIndex: 7
         }, true, true);
 
       this.chart.addSeries({
         type: 'packedbubble',
         name: "Hastags",
-        data: jsonObject4,
-        index: 3,
+        data: this.jsonObject_hastags,
+        index: 2,
+        colorIndex: 4
        }, true, true);
-
-      
       
     }
   }
 
 
 }
+
