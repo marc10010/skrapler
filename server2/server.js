@@ -3,7 +3,7 @@ const Twitter = require("twit");
 const cors = require("cors");
 const {MONGODB} = require("./config.js");
 const mongoose = require('mongoose');
-const Blacklist = require("./models/Blacklist");
+const BlacklistModel = require("./models/Blacklist");
 
 const app = express();
 
@@ -59,6 +59,43 @@ app.get('/search/:user', (req,res)=>{
         
     });
 })
+
+app.get('/blacklist'), (req,res)=>{
+
+    let newBlacklist = BlacklistModel.find(function(err, data) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(data);
+        }
+    });  
+    
+}
+
+app.get('/blacklist/delete/:word', function(req, res) {
+    BlackListModel.remove({Word:req.params.word}, 
+    function(err, data) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(data);
+        }
+    });  
+});
+
+app.get('/blacklist/add/:word', function(req, res) {
+    BlackListModel.add({Word:req.params.word}, 
+    function(err, data) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(data);
+        }
+    });  
+});
 
 mongoose 
   .connect(MONGODB)
