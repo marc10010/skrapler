@@ -16,7 +16,7 @@ import { ApiResponse } from '../types/api';
     //LLamadas a la api apartir de aqui
 
     getBlackList(){
-      return this.http.get<any>('http://localhost:3000/blacklist/',
+      return this.http.get<any>('http://localhost:3000/blacklist',
       { headers: {'Access-Control-Allow-Origin': '*',
                   'Access-Control-Allow-Methods': 'GET'}
         });

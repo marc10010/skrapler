@@ -62,14 +62,15 @@ app.get('/search/:user', (req,res)=>{
 
 app.get('/blacklist'), (req,res)=>{
 
-    let newBlacklist = BlacklistModel.find(function(err, data) {
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.send(data);
-        }
-    });  
+    BlacklistModel.find({}, function(err, users) {
+        var userMap = {};
+    
+        users.forEach(function(user) {
+          userMap[user._id] = user;
+        });
+    
+        res.send(userMap);  
+      }); 
     
 }
 

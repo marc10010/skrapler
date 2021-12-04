@@ -320,6 +320,8 @@ export class TwitterComponent implements OnInit {
       
       }
     }); 
+
+    this.getBlacklist(); //just for testing
   }
 
   deleteBlacklistedWord(){
