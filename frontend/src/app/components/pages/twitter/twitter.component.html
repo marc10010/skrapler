@@ -7,10 +7,22 @@
         <div fxFlex = "100">
 
             <mat-form-field appearance="outline">
-                <mat-label> @ usuario</mat-label>
+                <mat-label> @ user</mat-label>
                 <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
             </mat-form-field>
         </div>
+        <div fxFlex = "100">
+            <mat-form-field appearance="outline">
+                <mat-label> Blacklist add word</mat-label>
+                <input [(ngModel)]=bladdw name="blacklist add word" matInput type="text" (keyup.enter)="addBlacklistedWord()" >
+            </mat-form-field>
+        </div> 
+        <div fxFlex = "100">
+            <mat-form-field appearance="outline">
+                <mat-label> Blacklist remove word</mat-label>
+                <input [(ngModel)]=bldeletew name="blacklist remove word" matInput type="text" (keyup.enter)="deleteBlacklistedWord()" >
+            </mat-form-field>
+        </div> 
         <div class="highcharts-figure" fxFlex = "100" [chart]="chart"></div>
     </div>
 

@@ -74,27 +74,21 @@ app.get('/blacklist'), (req,res)=>{
 }
 
 app.get('/blacklist/delete/:word', function(req, res) {
-    BlackListModel.remove({Word:req.params.word}, 
-    function(err, data) {
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.send(data);
-        }
-    });  
+    
+    BlacklistModel.findOneAndDelete({ Word: req.params.word })
+    .then(res.status(200).json({ message: "Blacklisted word deleted successfully" }))
+   .catch((err) => next(err));
 });
 
 app.get('/blacklist/add/:word', function(req, res) {
-    BlackListModel.add({Word:req.params.word}, 
-    function(err, data) {
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.send(data);
-        }
-    });  
+    
+    const newBlacklistedWord = new BlacklistModel({
+      Word: req.params.word  
+    });
+    newBlacklistedWord.save()
+    .then(res.status(200).json({ message: "Blacklisted word added successfully" }))
+    .catch((err) => next(err));
+   
 });
 
 mongoose 

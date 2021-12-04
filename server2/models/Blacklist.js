@@ -5,4 +5,4 @@ const blacklistSchema = new Schema ({
 
 });
 
-module.exports = model("Blacklist", blacklistSchema);
+module.exports = model("BlacklistModel", blacklistSchema);

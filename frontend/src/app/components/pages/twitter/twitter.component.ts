@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiTwitter } from 'src/app/services/api.twitter';
+import { ApiMongo } from 'src/app/services/api.mongo';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
 import { Chart } from 'angular-highcharts';
@@ -76,6 +77,8 @@ export class TwitterComponent implements OnInit {
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
   nombre: string= "";
+  bladdw: string= "";
+  bldeletew: string= "";
   selector = 3;
   dateFrom: Date = new Date();
   dateTo: Date = new Date();
@@ -85,6 +88,7 @@ export class TwitterComponent implements OnInit {
 
   constructor(
     private apiTwitter: ApiTwitter,
+    private apiMongo: ApiMongo,
     public dialog: MatDialog,
   ) { 
   }
@@ -298,6 +302,35 @@ export class TwitterComponent implements OnInit {
     }
   }
 
+  getBlacklist(){
+    
+    this.apiMongo.getBlackList().subscribe(data=> {
+      if(data.length>0){
+        console.log(data);
+      
+      }
+    }); 
+  }
+
+  addBlacklistedWord(){
+    
+    this.apiMongo.addBlacklistedWord(this.bladdw).subscribe(data=> {
+      if(data.length>0){
+        console.log(data);
+      
+      }
+    }); 
+  }
+
+  deleteBlacklistedWord(){
+    
+    this.apiMongo.deleteBlacklistedWord(this.bldeletew).subscribe(data=> {
+      if(data.length>0){
+        console.log(data);
+      
+      }
+    }); 
+  }
 
 }
 
