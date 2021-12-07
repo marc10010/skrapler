@@ -8,6 +8,7 @@ import { Chart } from 'angular-highcharts';
 import { SeriesOptionsType } from 'highcharts';
 import { flush } from '@angular/core/testing';
 import { ArrayType } from '@angular/compiler';
+import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/twitter-words-filter.component';
 
 
 @Component({
@@ -20,45 +21,7 @@ export class TwitterComponent implements OnInit {
   jsonObject_arrobas = {};
   jsonObject_hastags = {};
 
-  chart = new Chart({
-    chart: {     
-      type: 'packedbubble',
-      height: '80%'
-    },
-    title: {
-      text: 'Frequent Words'
-    },
-    tooltip: {
-        useHTML: true,
-        pointFormat: '<b>{point.name}:</b> {point.value}</sub>'
-    },
-    plotOptions: {
-        packedbubble: {
-            draggable: false,
-            allowPointSelect: true,
-            minSize: '40%',
-            maxSize: '100%',
-            layoutAlgorithm: {
-                gravitationalConstant: 0.05,
-                splitSeries: "true",
-                seriesInteraction: false,
-                dragBetweenSeries: true,
-                parentNodeLimit: true
-            },
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}',
-                style: {
-                    color: 'black',
-                    textOutline: 'none',
-                    fontWeight: 'normal',
-                    fontSize: '18px'
-                }
-            },
-        },
-      },
-    series: []
-  });
+  chart : any;
 
   infoUser = {
     id: "",
@@ -73,6 +36,8 @@ export class TwitterComponent implements OnInit {
   dictWords: any = "" ;
   dictWordsArroba: any = "" ;
   dictWordsHashtag: any = "" ;
+  bannedWords: any[]= [];
+  bannedWordsArray: any[]= [];
   
   tweets: any[]= [];
   tweetsOriginal: any[]=[];
@@ -94,7 +59,10 @@ export class TwitterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selector = 3;  
+    this.selector = 3;
+    this.newChart();
+    this.getBlacklist();  
+    
   }
 
   openTwitter(){
@@ -140,13 +108,10 @@ export class TwitterComponent implements OnInit {
     this.dateFrom =new Date();
     this.dateTo = new Date();
     this.filterWord = "";
-    console.log("chart",this.chart);
-    this.chart.removeSeries(2);
-    this.chart.removeSeries(1);
-    this.chart.removeSeries(0);
     this.dictWords = [];
     this.dictWordsArroba = [];
     this.dictWordsHashtag = [];
+    this.newChart();
   }
   
   obtenerTweetsSolo(){
@@ -215,12 +180,11 @@ export class TwitterComponent implements OnInit {
       this.popUpOpened = 0;
       console.log("done", this.tweets);
     }    
-    console.log("freq")
-    this.frequencyWords();
+    console.log("freq");
+    this.frequencyWords();  
   }
 
   frequencyWords(){
-    let bannedWords = ['the', 'for', 'a', 'at', 'is', 'in', "it's", 'of'];
     this.dictWords= new Map<string, number>();
     this.dictWordsArroba= new Map<string, number>();
     this.dictWordsHashtag= new Map<string, number>();
@@ -231,7 +195,7 @@ export class TwitterComponent implements OnInit {
         else word = tweet.full_text.split(' ').slice(0,-1);
         for(let i=0 ; i< word.length; ++i){
           //si la paraula no esta en la llista de paraules banegades
-          if(! bannedWords.includes(word[i].toLowerCase())){
+          if(! this.bannedWordsArray.includes(word[i].toLowerCase())){
             //arrobas
             if(word[i].toLowerCase()[0]=="@"){
               if( this.dictWordsArroba.has(word[i].toLowerCase()) ){
@@ -273,7 +237,7 @@ export class TwitterComponent implements OnInit {
       array = Array.from(this.dictWordsHashtag, ([name, value]) => ({ name, value }));
       this.jsonObject_hastags  =array.slice(0,15);
 
-
+      console.log(6);
         
       this.chart.addSeries({
         type: 'packedbubble',
@@ -302,36 +266,74 @@ export class TwitterComponent implements OnInit {
     }
   }
 
-  getBlacklist(){
-    
+
+  openDialogBlacklist(){
+    const dialogRef = this.dialog.open(TwitterWordsFilterComponent, {
+      width: '40%',
+      height: '95%',
+      data: this.bannedWords,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(1);
+      this.newChart();
+      console.log(2);
+      this.getBlacklist();
+      console.log(3);
+      if(this.selector==1) this.obtenerAll();
+      else if (this.selector==2) this.obtenerTweetsComments();
+      else if(this.selector==3)  this.obtenerTweetsRetweets();
+      else this.obtenerTweetsSolo();
+      
+    });
+  }
+
+  getBlacklist(){   
     this.apiMongo.getBlackList().subscribe(data=> {
-      if(data.length>0){
-        console.log(data);
-      
-      }
+      this.bannedWords= data;
+      this.bannedWordsArray = data.map((x: { Word: any; }) => x.Word)
     }); 
   }
 
-  addBlacklistedWord(){
-    
-    this.apiMongo.addBlacklistedWord(this.bladdw).subscribe(data=> {
-      if(data.length>0){
-        console.log(data);
-      
-      }
-    }); 
-
-    this.getBlacklist(); //just for testing
-  }
-
-  deleteBlacklistedWord(){
-    
-    this.apiMongo.deleteBlacklistedWord(this.bldeletew).subscribe(data=> {
-      if(data.length>0){
-        console.log(data);
-      
-      }
-    }); 
+  newChart(){
+    this.chart = new Chart({
+      chart: {     
+        type: 'packedbubble',
+        height: '80%'
+      },
+      title: {
+        text: 'Frequent Words'
+      },
+      tooltip: {
+          useHTML: true,
+          pointFormat: '<b>{point.name}:</b> {point.value}</sub>'
+      },
+      plotOptions: {
+          packedbubble: {
+              draggable: false,
+              allowPointSelect: true,
+              minSize: '40%',
+              maxSize: '100%',
+              layoutAlgorithm: {
+                  gravitationalConstant: 0.05,
+                  splitSeries: "true",
+                  seriesInteraction: false,
+                  dragBetweenSeries: true,
+                  parentNodeLimit: true
+              },
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.name}',
+                  style: {
+                      color: 'black',
+                      textOutline: 'none',
+                      fontWeight: 'normal',
+                      fontSize: '18px'
+                  }
+              },
+          },
+        },
+      series: []
+    });
   }
 
 }

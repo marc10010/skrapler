@@ -16,6 +16,8 @@ import { HighlightPipe } from './components/pipes/highlight.pipe';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import * as more from 'highcharts/highcharts-more.src';
 import * as exporting from 'highcharts/modules/exporting.src';
+import { TwitterWordsFilterComponent } from './components/popups/twitter-words-filter/twitter-words-filter.component';
+import { DialogPopUpComponent } from './components/popups/dialog-pop-up/dialog-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import * as exporting from 'highcharts/modules/exporting.src';
     TwitterComponent,
     FacebookComponent,
     TwitterFilterComponent,
-    HighlightPipe
+    HighlightPipe,
+    TwitterWordsFilterComponent,
+    DialogPopUpComponent
   ],
   imports: [
     BrowserModule,

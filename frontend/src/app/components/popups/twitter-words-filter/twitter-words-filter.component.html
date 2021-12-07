@@ -1,0 +1,48 @@
+<button mat-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+</button>
+
+<h1 mat-dialog-title >BlackList</h1>    
+<mat-dialog-content class="mantenimiento">
+    <form >
+        <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Word</mat-label>
+            <input required  
+                [(ngModel)]="wordSelected.Word" name="word" matInput type="text" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
+            <button  mat-button *ngIf="wordSelected.Word" matSuffix mat-icon-button aria-label="Clear"
+                (click)="resetItem()"><mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+
+    <div class="tabla">
+        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init standar-table-mecanoviga">
+            
+            
+            <ng-container matColumnDef="id">
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="buttons">
+                <th mat-header-cell *matHeaderCellDef>        
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <button align="left"  mat-icon-button type="button" (click)="dialogEliminarUnCampo($event, element)" >
+                        <mat-icon>deletes</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+           
+            <!-- Oferta Column -->
+            <ng-container matColumnDef=word>
+                <th mat-header-cell *matHeaderCellDef> word </th>
+                <td mat-cell *matCellDef="let element" align="left"> {{element.Word}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row id ="rowIndex" *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+        </table>
+    </div>
+</mat-dialog-content>
+

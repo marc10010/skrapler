@@ -60,19 +60,21 @@ app.get('/search/:user', (req,res)=>{
     });
 })
 
-app.get('/blacklist'), (req,res)=>{
+app.get('/blacklist', function(req, res) {
 
-    BlacklistModel.find({}, function(err, users) {
-        var userMap = {};
-    
-        users.forEach(function(user) {
-          userMap[user._id] = user;
-        });
-    
-        res.send(userMap);  
-      }); 
-    
-}
+    var wordMap = [];
+    BlacklistModel.find({}, function(err, words ) {
+        if(words){
+            let i= 0;
+            words.forEach(function( word) {
+                wordMap.push({id: i, Word: word.Word});
+                i++;
+            });  
+            res.json(wordMap);    
+        }
+        else res.json({error: err })
+    })
+})
 
 app.get('/blacklist/delete/:word', function(req, res) {
     
@@ -98,9 +100,11 @@ mongoose
     console.log('MongoDB Connected');
     return app.listen({ port: 3000 }, "0.0.0.0");
   })
+  /*
   .then((res) => {
       console.log(`Server running at ${res.url}`);
   })
+  */
 //app.listen(3000, ()=> console.log("running server"))
 
 
