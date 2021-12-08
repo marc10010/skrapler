@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { TwitterComponent } from './components/pages/twitter/twitter.component';
-import { FacebookComponent } from './components/pages/facebook/facebook.component';
+import { LinkedInComponent } from './components/pages/linkedIn/linkedIn.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TwitterFilterComponent } from './components/popups/twitter-filter/twitter-filter.component';
 import { HighlightPipe } from './components/pipes/highlight.pipe';
@@ -24,7 +24,7 @@ import { DialogPopUpComponent } from './components/popups/dialog-pop-up/dialog-p
     AppComponent,
     HeaderComponent,
     TwitterComponent,
-    FacebookComponent,
+    LinkedInComponent,
     TwitterFilterComponent,
     HighlightPipe,
     TwitterWordsFilterComponent,
