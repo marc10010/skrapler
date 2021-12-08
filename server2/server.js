@@ -97,7 +97,7 @@ app.get('/blacklist/add/:word', function(req, res) {
 mongoose 
   .connect(MONGODB)
   .then(() => {
-    console.log('MongoDB Connected');
+    console.log('MongoDB & Twitter API Connected');
     return app.listen({ port: 3000 }, "0.0.0.0");
   })
   /*

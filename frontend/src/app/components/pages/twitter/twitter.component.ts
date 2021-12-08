@@ -5,9 +5,17 @@ import { ApiMongo } from 'src/app/services/api.mongo';
 import { Tweets } from 'src/app/types/api';
 import { TwitterFilterComponent } from 'src/app/components/popups/twitter-filter/twitter-filter.component';
 import { Chart } from 'angular-highcharts';
-import { SeriesOptionsType } from 'highcharts';
-import { flush } from '@angular/core/testing';
-import { ArrayType } from '@angular/compiler';
+import * as Highcharts from 'highcharts/highstock';
+import Exporting from 'highcharts/modules/exporting';
+
+Highcharts.setOptions({
+  lang:{
+      contextButtonTitle: "Blacklist"
+  }
+})
+Exporting(Highcharts);
+
+
 import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/twitter-words-filter.component';
 
 
@@ -17,6 +25,8 @@ import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/t
   styleUrls: ['./twitter.component.scss']
 })
 export class TwitterComponent implements OnInit {
+  
+  
   jsonObject_words = {};
   jsonObject_arrobas = {};
   jsonObject_hastags = {};
@@ -59,6 +69,7 @@ export class TwitterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.selector = 3;
     this.newChart();
     this.getBlacklist();  
@@ -158,6 +169,7 @@ export class TwitterComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("Dialog result:", result);
       if(result){
+        this.newChart();
         this.popUpOpened = 1;
         this.selector = result.picker;
         this.dateFrom = result.DateFrom;
@@ -274,11 +286,8 @@ export class TwitterComponent implements OnInit {
       data: this.bannedWords,
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(1);
       this.newChart();
-      console.log(2);
       this.getBlacklist();
-      console.log(3);
       if(this.selector==1) this.obtenerAll();
       else if (this.selector==2) this.obtenerTweetsComments();
       else if(this.selector==3)  this.obtenerTweetsRetweets();
@@ -294,7 +303,31 @@ export class TwitterComponent implements OnInit {
     }); 
   }
 
+
+  HelloWorld =  () => {
+    const dialogRef = this.dialog.open(TwitterWordsFilterComponent, {
+      width: '40%',
+      height: '95%',
+      data: this.bannedWords,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.newChart();
+      this.getBlacklist();
+      if(this.selector==1) this.obtenerAll();
+      else if (this.selector==2) this.obtenerTweetsComments();
+      else if(this.selector==3)  this.obtenerTweetsRetweets();
+      else this.obtenerTweetsSolo();
+      
+    });
+  };
+  
+  
   newChart(){
+
+    
+    
+  
+
     this.chart = new Chart({
       chart: {     
         type: 'packedbubble',
@@ -331,10 +364,24 @@ export class TwitterComponent implements OnInit {
                   }
               },
           },
-        },
+      },
+      exporting: {
+        buttons: {
+          contextButton:{
+            onclick: this.HelloWorld
+            
+          }
+        }
+    },
       series: []
     });
+    this.chart.setOptions({
+      lang:{
+        contextButtonTitle: "Blacklist"
+      }
+    })
   }
 
+  
 }
 
