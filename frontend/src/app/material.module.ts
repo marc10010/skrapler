@@ -11,7 +11,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTableModule } from '@angular/material/table' 
+import { MatTableModule } from '@angular/material/table';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -28,7 +29,8 @@ const modulosMaterial = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatSliderModule,
 ]
 
 @NgModule({

@@ -20,7 +20,9 @@ export class TwitterFilterComponent implements OnInit {
   maxDate = new Date();
   dateFrom = new Date();
   dateTo = new Date();
+  today = new Date();
   word: string= "";
+
 
 
   ngOnInit(): void {
@@ -35,6 +37,10 @@ export class TwitterFilterComponent implements OnInit {
   }
   applyFilters() {
     this.dialogRef.close({'DateFrom': this.dateFrom, 'DateTo': this.dateTo, 'picker': this.pickerValue, 'word': this.word });
+  }
+  minDateFunction(a: Date, b: Date){
+    if(a < b) return a;
+    return b;
   }
   
 }

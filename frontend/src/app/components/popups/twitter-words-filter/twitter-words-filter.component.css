@@ -49,3 +49,7 @@ table {
     overflow: auto;
 }
 
+#id {
+    flex: 0 0 8% ;
+    width: 10%;
+  }

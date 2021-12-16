@@ -8,11 +8,6 @@ import { Chart } from 'angular-highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import Exporting from 'highcharts/modules/exporting';
 
-Highcharts.setOptions({
-  lang:{
-      contextButtonTitle: "Blacklist"
-  }
-})
 Exporting(Highcharts);
 
 
@@ -242,14 +237,13 @@ export class TwitterComponent implements OnInit {
       
       
       let array = Array.from(this.dictWords, ([name, value]) => ({ name, value }));
-      this.jsonObject_words  =array.slice(0,15);
+      this.jsonObject_words  =array.slice(0,25);
 
       array = Array.from(this.dictWordsArroba, ([name, value]) => ({ name, value }));
       this.jsonObject_arrobas  =array.slice(0,15);
       array = Array.from(this.dictWordsHashtag, ([name, value]) => ({ name, value }));
       this.jsonObject_hastags  =array.slice(0,15);
 
-      console.log(6);
         
       this.chart.addSeries({
         type: 'packedbubble',
@@ -375,11 +369,7 @@ export class TwitterComponent implements OnInit {
     },
       series: []
     });
-    this.chart.setOptions({
-      lang:{
-        contextButtonTitle: "Blacklist"
-      }
-    })
+    
   }
 
   

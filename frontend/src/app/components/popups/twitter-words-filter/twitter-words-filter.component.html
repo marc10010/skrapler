@@ -2,8 +2,45 @@
     <mat-icon>close</mat-icon>
 </button>
 
-<h1 mat-dialog-title >BlackList</h1>    
+<h1 mat-dialog-title >WordMap settings</h1>    
 <mat-dialog-content class="mantenimiento">
+    <div class="configSlider">
+        <label>Number of Words</label>
+        <mat-slider
+            [displayWith]="word"
+            tickInterval="1"
+            step="1"
+            min="10"
+            max="50"
+            aria-label="units"
+            [(ngModel)]= "word_slider">
+        </mat-slider>
+        <label>{{word_slider}}</label>
+        <br>
+        <label>Number of Hashtags</label>
+        <mat-slider
+            [displayWith]="hashtag"
+            tickInterval="1"
+            step="1"
+            min="0"
+            max="30"
+            aria-label="units"
+            [(ngModel)]= "hashtag_slider">
+        </mat-slider>
+        <label>{{hashtag_slider}}</label>
+        <br>
+        <label>Number of tags </label>
+        <mat-slider
+            [displayWith]="tag"
+            tickInterval="1"
+            step="1"
+            min="0"
+            max="30"
+            aria-label="units"
+            [(ngModel)]= "tag_slider">
+        </mat-slider>
+        <label>{{tag_slider}}</label>
+    </div>
     <form >
         <mat-form-field fxFlex="100" appearance="outline">
             <mat-label>Word</mat-label>
@@ -16,17 +53,17 @@
     </form>
 
     <div class="tabla">
-        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init standar-table-mecanoviga">
+        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init standar-table-mecanoviga" fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
             
             
-            <ng-container matColumnDef="id">
+            <ng-container matColumnDef="id" fxFlex="1" fxFlex.sm="1" fxFlex.xs="1">
                 <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="buttons">
-                <th mat-header-cell *matHeaderCellDef>        
+            <ng-container matColumnDef="buttons" fxFlex="10" fxFlex.sm="10" fxFlex.xs="10" >
+                <th mat-header-cell *matHeaderCellDef >        
                 </th>
-                <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element" >
                     <button align="left"  mat-icon-button type="button" (click)="dialogEliminarUnCampo($event, element)" >
                         <mat-icon>deletes</mat-icon>
                     </button>
@@ -34,7 +71,7 @@
             </ng-container>
            
             <!-- Oferta Column -->
-            <ng-container matColumnDef=word>
+            <ng-container matColumnDef=word fxFlex="89" fxFlex.sm="89" fxFlex.xs="89">
                 <th mat-header-cell *matHeaderCellDef> word </th>
                 <td mat-cell *matCellDef="let element" align="left"> {{element.Word}} </td>
             </ng-container>

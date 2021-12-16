@@ -14,6 +14,19 @@ import { ApiMongo } from 'src/app/services/api.mongo';
 export class TwitterWordsFilterComponent implements OnInit {
 
 
+  word_slider = 0;
+  hashtag_slider = 0;
+  tag_slider = 0;
+
+  word(value: number) {
+    return value;
+  }
+  hashtag(value: number) {
+    return value;
+  }
+  tag(value: number) {
+    return value;
+  }
   
   bldeletew: string= "";
   wordSelected: any = {
