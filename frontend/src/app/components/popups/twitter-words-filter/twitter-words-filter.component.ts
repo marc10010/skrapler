@@ -31,10 +31,11 @@ export class TwitterWordsFilterComponent implements OnInit {
   bldeletew: string= "";
   wordSelected: any = {
     id: null,
-    word: "",
+    Word: "",
   };
 
   words: PopupBlacklistTwitter[] = [];
+  wordAll: PopupBlacklistTwitter[] = [];
 
 
   displayedColumns: string[] = ['buttons', "word"];
@@ -53,10 +54,8 @@ export class TwitterWordsFilterComponent implements OnInit {
     this.word_slider= this.data.word_slider;
     this.tag_slider = this.data.tag_slider;
     this.hashtag_slider = this.data.hashtag_slider;  
-    console.log(this.data ,this.words 
-      ,this.word_slider
-      ,this.tag_slider 
-      ,this.hashtag_slider )
+    this.wordAll = this.words;
+    console.log(this.wordAll);
   }
 
 
@@ -104,6 +103,7 @@ export class TwitterWordsFilterComponent implements OnInit {
   resetItem() {
     this.wordSelected.id = null;
     this.wordSelected.Word = "";
+    this.goTo();
     
   }
   test(){
@@ -113,6 +113,13 @@ export class TwitterWordsFilterComponent implements OnInit {
       hashtag_slider: this.hashtag_slider,
       tag_slider: this.tag_slider
       });
+  }
+
+  goTo(){ 
+    console.log(this.wordSelected.Word);    
+    this.words = this.wordAll.filter(word => word.Word.toLowerCase().includes(this.wordSelected.Word.toLowerCase() ));
+    if(this.words.length >0) this.table.renderRows();
+    else this.words = this.wordAll;
   }
 
 

@@ -18,7 +18,7 @@ export interface PopUps{
 }
 export interface PopupBlacklistTwitter {
     id: number;
-    word: string;
+    Word: string;
 }
 
 export interface PopUpWordMapTwitter {

@@ -45,7 +45,7 @@
         <mat-form-field fxFlex="100" appearance="outline">
             <mat-label>Word</mat-label>
             <input required  
-                [(ngModel)]="wordSelected.Word" name="word" matInput type="text" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
+                [(ngModel)]="wordSelected.Word" name="word" matInput type="text" (ngModelChange)="goTo()" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
             <button  mat-button *ngIf="wordSelected.Word" matSuffix mat-icon-button aria-label="Clear"
                 (click)="resetItem()"><mat-icon>close</mat-icon>
             </button>
