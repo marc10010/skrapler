@@ -5,7 +5,7 @@ import { TwitterComponent } from './components/pages/twitter/twitter.component';
 
 const routes: Routes = [
   { path: 'twitter', component: TwitterComponent },
-  { path: 'linkedin', component: LinkedInComponent },
+  { path: 'linkedIn', component: LinkedInComponent },
   
 ];
 
