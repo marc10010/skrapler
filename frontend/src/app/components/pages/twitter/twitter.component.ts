@@ -9,8 +9,6 @@ import * as Highcharts from 'highcharts/highstock';
 import Exporting from 'highcharts/modules/exporting';
 
 Exporting(Highcharts);
-
-
 import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/twitter-words-filter.component';
 
 
@@ -21,7 +19,9 @@ import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/t
 })
 export class TwitterComponent implements OnInit {
   
-  
+  word_slide= 0;
+  hashtag_slide = 0;
+  tag_slide = 0;
   jsonObject_words = {};
   jsonObject_arrobas = {};
   jsonObject_hastags = {};
@@ -64,8 +64,12 @@ export class TwitterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.word_slide = 25;
+    this.hashtag_slide= 15;
+    this.tag_slide= 15;
     
     this.selector = 3;
+
     this.newChart();
     this.getBlacklist();  
     
@@ -158,7 +162,7 @@ export class TwitterComponent implements OnInit {
     const dialogRef = this.dialog.open(TwitterFilterComponent, {
       width: '580px',
       height: '375px',
-      
+      disableClose: true,
       data: {picker: this.selector.toString(), fechaFin: this.tweetsOriginal[0].created_at, fechaIni:this.tweetsOriginal[this.tweetsOriginal.length-1].created_at, word: this.filterWord }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -237,12 +241,14 @@ export class TwitterComponent implements OnInit {
       
       
       let array = Array.from(this.dictWords, ([name, value]) => ({ name, value }));
-      this.jsonObject_words  =array.slice(0,25);
-
+      this.jsonObject_words  =array.slice(0,this.word_slide);
+      console.log(this.jsonObject_words)
       array = Array.from(this.dictWordsArroba, ([name, value]) => ({ name, value }));
-      this.jsonObject_arrobas  =array.slice(0,15);
+      this.jsonObject_arrobas =array.slice(0,this.tag_slide);
+      console.log(this.jsonObject_arrobas);
       array = Array.from(this.dictWordsHashtag, ([name, value]) => ({ name, value }));
-      this.jsonObject_hastags  =array.slice(0,15);
+      this.jsonObject_hastags  =array.slice(0,this.hashtag_slide);
+      console.log(this.jsonObject_hastags)
 
         
       this.chart.addSeries({
@@ -273,23 +279,7 @@ export class TwitterComponent implements OnInit {
   }
 
 
-  openDialogBlacklist(){
-    const dialogRef = this.dialog.open(TwitterWordsFilterComponent, {
-      width: '40%',
-      height: '95%',
-      data: this.bannedWords,
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.newChart();
-      this.getBlacklist();
-      if(this.selector==1) this.obtenerAll();
-      else if (this.selector==2) this.obtenerTweetsComments();
-      else if(this.selector==3)  this.obtenerTweetsRetweets();
-      else this.obtenerTweetsSolo();
-      
-    });
-  }
-
+ 
   getBlacklist(){   
     this.apiMongo.getBlackList().subscribe(data=> {
       this.bannedWords= data;
@@ -298,13 +288,23 @@ export class TwitterComponent implements OnInit {
   }
 
 
-  HelloWorld =  () => {
+  openDialogBlacklist =  () => {
+    let data: any= {};
+    data['data']= this.bannedWords;
+    data['word_slider']= this.word_slide;
+    data['tag_slider']= this.tag_slide;
+    data['hashtag_slider']= this.hashtag_slide;
     const dialogRef = this.dialog.open(TwitterWordsFilterComponent, {
       width: '40%',
       height: '95%',
-      data: this.bannedWords,
+      data: data,
+      disableClose: true
     });
+
     dialogRef.afterClosed().subscribe(result => {
+      this.word_slide = result.word_slider;
+      this.tag_slide = result.tag_slider;
+      this.hashtag_slide = result.hashtag_slider;
       this.newChart();
       this.getBlacklist();
       if(this.selector==1) this.obtenerAll();
@@ -313,6 +313,7 @@ export class TwitterComponent implements OnInit {
       else this.obtenerTweetsSolo();
       
     });
+    
   };
   
   
@@ -362,7 +363,7 @@ export class TwitterComponent implements OnInit {
       exporting: {
         buttons: {
           contextButton:{
-            onclick: this.HelloWorld
+            onclick: this.openDialogBlacklist
             
           }
         }

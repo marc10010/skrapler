@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogPopUpComponent } from '../dialog-pop-up/dialog-pop-up.component';
 import { MatTable } from '@angular/material/table';
-import { PopupBlacklistTwitter } from 'src/app/types/global';
+import { PopupBlacklistTwitter, PopUpWordMapTwitter } from 'src/app/types/global';
 import { ApiMongo } from 'src/app/services/api.mongo';
 
 
@@ -41,15 +41,22 @@ export class TwitterWordsFilterComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<any>;
   constructor(
     private apiMongo: ApiMongo,
-    public dialog: MatDialog,
+    public dialog: MatDialogRef<TwitterWordsFilterComponent>,
     public dialogVerificar: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: PopupBlacklistTwitter[]
+    @Inject(MAT_DIALOG_DATA) public data: PopUpWordMapTwitter
  
-    ) { }
+    ) {   }
 
   ngOnInit(): void {
-    this.words = this.data;
-    console.log(this.words);
+
+    this.words = this.data.data;
+    this.word_slider= this.data.word_slider;
+    this.tag_slider = this.data.tag_slider;
+    this.hashtag_slider = this.data.hashtag_slider;  
+    console.log(this.data ,this.words 
+      ,this.word_slider
+      ,this.tag_slider 
+      ,this.hashtag_slider )
   }
 
 
@@ -70,8 +77,9 @@ export class TwitterWordsFilterComponent implements OnInit {
     event.stopPropagation();
   }
   openDialog(title: string, msg: string, cancelBtn: boolean, tipo: any, word:string) {
-    const dialogRef = this.dialog.open(DialogPopUpComponent, {
-      data: { title: title, msg: msg, cancelBtn: cancelBtn }
+    const dialogRef = this.dialogVerificar.open(DialogPopUpComponent, {
+      data: { title: title, msg: msg, cancelBtn: cancelBtn },
+      disableClose: true
       
     });
 
@@ -98,5 +106,14 @@ export class TwitterWordsFilterComponent implements OnInit {
     this.wordSelected.Word = "";
     
   }
+  test(){
+    console.log("close");
+    this.dialog.close({
+      word_slider: this.word_slider, 
+      hashtag_slider: this.hashtag_slider,
+      tag_slider: this.tag_slider
+      });
+  }
+
 
 }

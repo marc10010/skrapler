@@ -20,3 +20,10 @@ export interface PopupBlacklistTwitter {
     id: number;
     word: string;
 }
+
+export interface PopUpWordMapTwitter {
+    data: PopupBlacklistTwitter[];
+    word_slider: number;
+    tag_slider: number;
+    hashtag_slider: number;
+}
