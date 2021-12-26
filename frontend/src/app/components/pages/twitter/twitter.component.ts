@@ -55,6 +55,8 @@ export class TwitterComponent implements OnInit {
   filterWord: string = "";
   popUpOpened: number = 0;
 
+  inicio = true;
+
 
   constructor(
     private apiTwitter: ApiTwitter,
@@ -82,7 +84,7 @@ export class TwitterComponent implements OnInit {
     window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
   }
   buscar(){
-
+    this.inicio = false;
     this.flush();
     
     this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
