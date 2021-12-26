@@ -4,13 +4,23 @@
     overflow: hidden
 }
 
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 220px;
+    font-size: 25px;
+    font-family: 'helvetica';
+    color: #4B4B4B;
+    font-weight: bolder;
+}
+
 .flex {
     display: flex;
     justify-content: center;
-    align-items: top;
-    height: 100%;
     width: 100%;
-    margin-top: 50px;
+    padding-top: 15px;
   }
 
 div.mapa{
