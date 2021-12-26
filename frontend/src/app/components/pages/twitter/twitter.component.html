@@ -3,70 +3,91 @@
 <div class="container" fxLayout = "row wrap">
 
 <!-- *ngIf="tweets.length >0"-->
-    <div class="mapa" fxFlex = "65" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
-        <div fxFlex = "100">
-
-            <mat-form-field appearance="outline">
-                <mat-label> @ user</mat-label>
-                <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
-            </mat-form-field>
-        </div>
+    <div class="mapa" fxFlex = "60" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
         
-        <div class="highcharts-figure" fxFlex = "100" [chart]="chart"></div>
+        <div class="highcharts-figure" fxFlex = "100" [chart]="chart" ></div>
     </div>
 
-    <div  class="info" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
-        <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" style=" height: 150px;">
-            <div  fxFlex= "20" style="text-align: left;">
-                <img src="{{infoUser.image}}" alt="">
-                <mat-icon *ngIf=infoUser.verified >verified</mat-icon>
-            </div>
-            <div fxFlex= "30" >username: {{infoUser.username}}</div>
-            <div fxFlex= "30" style="text-align: left;">name: {{infoUser.name}}</div>
-            <div fxFlex= "100" style="text-align: left;">description: {{infoUser.description}}</div>
-            <div fxFlex= "100" style="text-align: left;">location: {{infoUser.location}}</div>
-            <div fxFlex= "100" style="align-content: flex-end;">
-                <button *ngIf="tweets.length >0"  mat-raised-button (click) = "openTwitter()">Go to Twitter</button>
-            </div>     
-        </div>
-        <div  fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
-            <button (click)="openDialogFilter()" *ngIf="tweets.length >0" mat-raised-button>
-                <mat-icon> filter_alt</mat-icon>  Filter 
-            </button> 
+    <div size="1px" class="verticalLine" fxFlex = "5"></div>
 
-             
-        </div>
-        <br>
-        <div  class="tweet" fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap" >
+
+    <div fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="column" style=" height: 1600px;">
+        
+        <mat-form-field appearance="fill" >
+            <mat-label > @ user</mat-label>
+            <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
+        </mat-form-field>
+
+        <div class="info1" fxFlex = "35" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="column" style=" height: 1600px;">
+        
+                
+            <div class="userinfo" fxFlex= "35" style="text-align: left;" fxLayout="row wrap">
+                <div > 
+                    <img src="{{infoUser.image}}" alt="">
+                    <mat-icon *ngIf=infoUser.verified >verified</mat-icon>
+                </div>
+
+                <div >username: {{infoUser.username}}</div>
+                <div style="text-align: left;">name: {{infoUser.name}}</div>
+            </div>
+
+            <hr size="8px" width="100%" color="white" />
+            <div fxFlex= "100" style="text-align: left;">description: {{infoUser.description}}</div>
+            <hr size="8px" width="100%" color="white" />
+            <div fxFlex= "100" style="text-align: left;">location: {{infoUser.location}}</div>
+            
+            <hr size="8px" width="100%" color="white" />
+
+            <div fxFlex= "100" style="align-content: flex-end;">
+                <button class="button" *ngIf="tweets.length >0"   color = "primary" mat-raised-button (click) = "openTwitter()">Go to Twitter</button>
+            </div>  
+            
+            <hr size="8px" width="100%" color="white" />
+
+            <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="row wrap">
+                <button  class="button" color = "primary" (click)="openDialogFilter()" *ngIf="tweets.length >0" mat-raised-button>
+                    <mat-icon> filter_alt</mat-icon>  Filter 
+                </button> 
+
+                
+            </div>
+
+            <hr size="8px" width="100%" color="white" />
+
+        
             <mat-card class="card" *ngFor="let tweet of tweets">
                 
                 <mat-card-title> {{infoUser.name}}  </mat-card-title>
                 <mat-card-subtitle>@{{infoUser.username}}</mat-card-subtitle>
                 
                 <mat-card-content>
-                  <p class ="rt" *ngIf="tweet.retweeted_status && filterWord =='' ">{{tweet.retweeted_status.full_text}}</p>
-                  <p class ="rt" *ngIf="tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.retweeted_status.full_text | highlight : filterWord" ></p>
-                  <p *ngIf="!tweet.retweeted_status && filterWord =='' "> {{tweet.full_text}}</p>
-                  <p *ngIf="!tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.full_text | highlight : filterWord" ></p>
+                <p class ="rt" *ngIf="tweet.retweeted_status && filterWord =='' ">{{tweet.retweeted_status.full_text}}</p>
+                <p class ="rt" *ngIf="tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.retweeted_status.full_text | highlight : filterWord" ></p>
+                <p *ngIf="!tweet.retweeted_status && filterWord =='' "> {{tweet.full_text}}</p>
+                <p *ngIf="!tweet.retweeted_status && filterWord !='' " [innerHTML] = "tweet.full_text | highlight : filterWord" ></p>
                 
-                  <div  *ngIf="!tweet.retweeted_status && tweet.entities.media">    
+                <div  *ngIf="!tweet.retweeted_status && tweet.entities.media">    
                     <img  class="tweet_img" src={{tweet.entities.media[0].media_url}}/>
-                  </div>
-                  
-                  <div  *ngIf="tweet.retweeted_status && tweet.retweeted_status.entities.media">    
+                </div>
+                
+                <div  *ngIf="tweet.retweeted_status && tweet.retweeted_status.entities.media">    
                     <img  class="tweet_img" src={{tweet.retweeted_status.entities.media[0].media_url}}/>
-                  </div>             
-                  <button mat-raised-button  (click)=openTweet(tweet)>  Go to the Tweet </button>
-                  <p style="text-align: end;"> 
-                      {{tweet.created_at | date: 'HH:mm dd-MM-yyyy'}}  
-                  </p>
+                </div>             
+                <button mat-raised-button  color = "primary"  (click)=openTweet(tweet)>  Go to the Tweet </button>
+
+                <p class="retweet">Retweets: {{tweet.retweet_count}}</p>
+                <p class="like" >Likes: {{tweet.favorite_count}} </p>
+
+                <p style="text-align: end;"> 
+                    {{tweet.created_at | date: 'HH:mm dd-MM-yyyy'}}  
+                </p>
 
                 </mat-card-content>
-                <mat-card-footer>
-                    <p>Retweets: {{tweet.retweet_count}}</p>
-                    <p>Likes: {{tweet.favorite_count}} </p>
-                </mat-card-footer>
             </mat-card>
+           
+
         </div>
+
+
     </div>
 </div>

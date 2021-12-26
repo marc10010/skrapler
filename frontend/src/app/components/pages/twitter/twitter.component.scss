@@ -1,6 +1,7 @@
 .container {
     height: 100%;
     padding: 10px 30px;
+    overflow: hidden
 }
 div.mapa{
     height: calc(100%);
@@ -10,10 +11,43 @@ div.mapa2{
     height: calc(100%);
     overflow: scroll;
 }
-div.info{
+div.info1{
     height: 100%;
     display: flex;
+    border-collapse:separate;
+    border-spacing: 10;
+    border:solid black 1px;
+    border-radius:10px;
+    overflow: scroll; 
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-right: 20px;
 }
+
+div.info2{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+
+.userinfo{
+    justify-content: space-between;
+}
+
+.button{
+    margin:auto;
+   display:block;
+}
+
+.contenido{
+    height:50px;
+    width:5%;
+    float:left;
+    margin: 45px;
+}
+
 .tweet {
     height: calc(100% - 100px);
     overflow: scroll;
@@ -23,6 +57,21 @@ div.info{
     border-radius: 5px;
     border-color: blue;
     margin-top: 10px;
+}
+
+.retweet{
+    margin-top: 15px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+
+.like{
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-right: 10px;
 }
 
 .rt{
@@ -35,6 +84,7 @@ div.info{
 }
 
 .highcharts-figure,
+
 .highcharts-data-table table {
     min-width: 320px;
     max-width: 800px;

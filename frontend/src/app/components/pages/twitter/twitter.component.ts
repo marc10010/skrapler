@@ -326,7 +326,7 @@ export class TwitterComponent implements OnInit {
     this.chart = new Chart({
       chart: {     
         type: 'packedbubble',
-        height: '80%'
+        height: '70%'
       },
       title: {
         text: 'Frequent Words'
