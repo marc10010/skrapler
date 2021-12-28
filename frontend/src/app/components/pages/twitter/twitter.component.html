@@ -88,8 +88,12 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div *ngIf="tweets.length == 0">
-                <p>This user doesn't have any Tweets</p>
+            <div *ngIf="cuentaPrivada">
+                <p>This user has a Private account</p>
+            </div>
+            
+            <div *ngIf="!cuentaPrivada  && noHayTweets">
+                <p>This user doesnt have tweets</p>
             </div>
            
 

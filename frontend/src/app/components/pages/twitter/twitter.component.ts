@@ -56,6 +56,10 @@ export class TwitterComponent implements OnInit {
   filterWord: string = "";
   popUpOpened: number = 0;
 
+
+  noHayTweets: boolean = true;
+  cuentaPrivada: boolean = false;
+
   inicio = true;
 
 
@@ -88,6 +92,7 @@ export class TwitterComponent implements OnInit {
 
     
     this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
+      
       if(data.length>0){
         this.inicio = false;
         this.flush();
@@ -138,33 +143,60 @@ export class TwitterComponent implements OnInit {
   
   obtenerTweetsSolo(){
     this.apiTwitter.obtenerTweetsSinRetweets(this.nombre).subscribe(data => {
-      this.tweets = data;
-      this.tweetsOriginal = data;
-      this.filter();
+      if(data['error'] && data['error'].message == "Not authorized.")  this.cuentaPrivada = true;
+      else if(data.length == 0) this.noHayTweets = true;
+      else{
+        this.noHayTweets = false;
+        this.cuentaPrivada= false;
+        this.tweets = data;
+        this.tweetsOriginal = data;
+        this.filter();
+      }
     })
   }
 
   obtenerTweetsRetweets(){
     this.apiTwitter.obtenerTweetsRetweets(this.nombre).subscribe(data=> {
-      this.tweets = data;
-      this.tweetsOriginal = data;
-      this.filter();
+      
+      console.log(data['error'].message);
+      if(data['error'] && data['error'].message == "Not authorized.")  this.cuentaPrivada = true;
+      else if(data.length == 0) this.noHayTweets = true;
+      else{
+        this.noHayTweets = false;
+        this.cuentaPrivada= false;
+        this.tweets = data;
+        this.tweetsOriginal = data;
+        this.filter();
+      }
     });
   }
 
   obtenerTweetsComments(){
     this.apiTwitter.obtenerTweetsComentarios(this.nombre).subscribe(data => {
-      this.tweets = data;
-      this.tweetsOriginal = data;
-      this.filter();
+      console.log(data);
+      if(data['error'] && data['error'].message == "Not authorized.")  this.cuentaPrivada = true;
+      else if(data.length == 0) this.noHayTweets = true;
+      else{
+        this.noHayTweets = false;
+        this.cuentaPrivada= false;
+        this.tweets = data;
+        this.tweetsOriginal = data;
+        this.filter();
+      }
     })
   }
   
   obtenerAll(){
     this.apiTwitter.obtenerTweetsComentariosRetweets(this.nombre).subscribe(data => {
-      this.tweets = data;
-      this.tweetsOriginal = data;
-      this.filter();
+      if(data['error'] && data['error'].message == "Not authorized.")  this.cuentaPrivada = true;
+      else if(data.length == 0) this.noHayTweets = true;
+      else{
+        this.noHayTweets = false;
+        this.cuentaPrivada= false;
+        this.tweets = data;
+        this.tweetsOriginal = data;
+        this.filter();
+      }
     })
   }
 
@@ -203,7 +235,7 @@ export class TwitterComponent implements OnInit {
       this.popUpOpened = 0;
       console.log("done", this.tweets);
     }    
-    console.log("freq");
+    console.log("freq", this.cuentaPrivada);
     this.frequencyWords();  
   }
 
