@@ -60,12 +60,18 @@ export class TwitterWordsFilterComponent implements OnInit {
 
 
   addBlacklistedWord(){
+    console.log(this.words);
     
-    this.apiMongo.addBlacklistedWord(this.wordSelected.Word).subscribe(data=> {
-      this.apiMongo.getBlackList().subscribe(data => {
-        this.words = data;
+    if(this.words.indexOf(this.wordSelected.Word)){
+      this.openDialog("Alerta", "La palabra "+this.wordSelected.Word+ " ya existe", false, "aviso", this.wordSelected.Word)
+    }
+    else{
+      this.apiMongo.addBlacklistedWord(this.wordSelected.Word).subscribe(data=> {
+        this.apiMongo.getBlackList().subscribe(data => {
+          this.words = data;
+        });
       });
-    }); 
+    } 
   }
 
 
