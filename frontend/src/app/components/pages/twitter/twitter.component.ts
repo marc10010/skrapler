@@ -10,6 +10,7 @@ import Exporting from 'highcharts/modules/exporting';
 
 Exporting(Highcharts);
 import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/twitter-words-filter.component';
+import { DialogPopUpComponent } from '../../popups/dialog-pop-up/dialog-pop-up.component';
 
 
 @Component({
@@ -84,11 +85,13 @@ export class TwitterComponent implements OnInit {
     window.open("https://twitter.com/"+ this.infoUser.username + '/status/'+ tweet.id_str)  
   }
   buscar(){
-    this.inicio = false;
-    this.flush();
+
     
     this.apiTwitter.infoUser(this.nombre).subscribe(data=> {
       if(data.length>0){
+        this.inicio = false;
+        this.flush();
+
         this.infoUser.name= data[0].name;
         this.infoUser.username= data[0].screen_name;
         this.infoUser.description= data[0].description;
@@ -100,6 +103,13 @@ export class TwitterComponent implements OnInit {
 
         this.obtenerTweetsRetweets();
       }
+      else{
+        if(data["error"].code == 17){
+          this.openDialog("Error", "Este usuario no existe", false, "aviso", this.nombre);
+        }
+        
+      }
+      
     }); 
   }
 
@@ -244,12 +254,15 @@ export class TwitterComponent implements OnInit {
       
       let array = Array.from(this.dictWords, ([name, value]) => ({ name, value }));
       this.jsonObject_words  =array.slice(0,this.word_slide);
+      this.word_slide= array.slice(0,this.word_slide).length;
       console.log(this.jsonObject_words)
       array = Array.from(this.dictWordsArroba, ([name, value]) => ({ name, value }));
       this.jsonObject_arrobas =array.slice(0,this.tag_slide);
+      this.tag_slide=array.slice(0,this.tag_slide).length;
       console.log(this.jsonObject_arrobas);
       array = Array.from(this.dictWordsHashtag, ([name, value]) => ({ name, value }));
       this.jsonObject_hastags  =array.slice(0,this.hashtag_slide);
+      this.hashtag_slide =array.slice(0,this.hashtag_slide).length;
       console.log(this.jsonObject_hastags)
 
         
@@ -263,7 +276,7 @@ export class TwitterComponent implements OnInit {
 
       this.chart.addSeries({
         type: 'packedbubble',
-        name: "Arrobas",
+        name: "Mentions",
         data: this.jsonObject_arrobas,
         index: 1,
         colorIndex: 7
@@ -271,7 +284,7 @@ export class TwitterComponent implements OnInit {
 
       this.chart.addSeries({
         type: 'packedbubble',
-        name: "Hastags",
+        name: "Hashtags",
         data: this.jsonObject_hastags,
         index: 2,
         colorIndex: 4
@@ -321,10 +334,6 @@ export class TwitterComponent implements OnInit {
   
   newChart(){
 
-    
-    
-  
-
     this.chart = new Chart({
       chart: {     
         type: 'packedbubble',
@@ -373,6 +382,19 @@ export class TwitterComponent implements OnInit {
       series: []
     });
     
+  }
+
+  openDialog(title: string, msg: string, cancelBtn: boolean, tipo: any, word:string) {
+    const dialogRef = this.dialog.open(DialogPopUpComponent, {
+      data: { title: title, msg: msg, cancelBtn: cancelBtn },
+      disableClose: true
+      
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
   }
 
   
