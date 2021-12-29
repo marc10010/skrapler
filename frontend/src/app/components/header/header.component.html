@@ -5,16 +5,8 @@
         <button [routerLink]="['/linkedIn']" mat-button>LinkedIn </button>
         
     </div>
-    <div> <p >Skrapler</p> </div>
-    <!--<div  ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle mat-button>
-            {{user.email}}
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem routerLink="/login" (click)="logOut()" mat-button>Sign Out</button>
-        </div>
-    </div>
-    -->
+    <div> <span>Skrapler </span></div>
+
     <div class="container float-right" ngbDropdown *ngIf="userLogged|async as user">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle mat-button>
             {{user.email}}
