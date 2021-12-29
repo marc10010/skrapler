@@ -158,7 +158,6 @@ export class TwitterComponent implements OnInit {
   obtenerTweetsRetweets(){
     this.apiTwitter.obtenerTweetsRetweets(this.nombre).subscribe(data=> {
       
-      console.log(data['error'].message);
       if(data['error'] && data['error'].message == "Not authorized.")  this.cuentaPrivada = true;
       else if(data.length == 0) this.noHayTweets = true;
       else{
@@ -173,7 +172,6 @@ export class TwitterComponent implements OnInit {
 
   obtenerTweetsComments(){
     this.apiTwitter.obtenerTweetsComentarios(this.nombre).subscribe(data => {
-      console.log(data);
       if(data['error'] && data['error'].message == "Not authorized.")  this.cuentaPrivada = true;
       else if(data.length == 0) this.noHayTweets = true;
       else{
