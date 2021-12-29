@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <b> Sign In</b>
+    </div>
+    <mat-card class="card-body p-4">
+      <label style="float: left;">Email</label>
+      <input class="form-control m-2" type="email" placeholder="introduce your email" [(ngModel)]="usuario.email">
+      <br>
+      <label style="float: left;">Password</label>
+      <input class="form-control m-2" type="password" placeholder="introduce your password" [(ngModel)]="usuario.password">
+
+      <button class="btn btn-primary btn-block m-2" (click)="Ingresar()">Sign in</button>
+      <label>Don't have an account yet? <a routerLink="/register">Create an account</a></label>
+    </mat-card>
+
+
+  </div>
+</div>

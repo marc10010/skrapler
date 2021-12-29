@@ -19,6 +19,14 @@ import * as exporting from 'highcharts/modules/exporting.src';
 import { TwitterWordsFilterComponent } from './components/popups/twitter-words-filter/twitter-words-filter.component';
 import { DialogPopUpComponent } from './components/popups/dialog-pop-up/dialog-pop-up.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './services/auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +36,9 @@ import { DialogPopUpComponent } from './components/popups/dialog-pop-up/dialog-p
     TwitterFilterComponent,
     HighlightPipe,
     TwitterWordsFilterComponent,
-    DialogPopUpComponent
+    DialogPopUpComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +49,12 @@ import { DialogPopUpComponent } from './components/popups/dialog-pop-up/dialog-p
     FlexLayoutModule,
     MatDialogModule,
     ChartModule,
+    NgbModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule
   ],
-  providers: [ { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] } ],
+  providers: [ AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

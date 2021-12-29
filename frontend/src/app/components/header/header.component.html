@@ -1,11 +1,22 @@
 <mat-toolbar color = "primary" class="fixed-header">
-    <ng-template ngIf = "true">
-        <button [routerLink]="['/twitter']" mat-button>Twitter </button>
-    </ng-template>
-
-    <ng-template ngIf = "true">
+    <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
+        
+            <button [routerLink]="['/twitter']" mat-button>Twitter </button>
+        
+    </div>
+    <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
+        
         <button [routerLink]="['/linkedIn']" mat-button>LinkedIn </button>
-    </ng-template>
+    
+    </div>
+    <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle mat-button>
+            {{user.email}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem routerLink="/login" (click)="logOut()" mat-button>Sign Out</button>
+        </div>
+    </div>
 
     <span class="title-center">Skrapler</span>
 </mat-toolbar>
