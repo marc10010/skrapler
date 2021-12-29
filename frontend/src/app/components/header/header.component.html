@@ -1,15 +1,12 @@
-<mat-toolbar color = "primary" class="fixed-header">
+<mat-toolbar color = "primary" fxLayoutAlign="space-between center">
     <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
-        
-            <button [routerLink]="['/twitter']" mat-button>Twitter </button>
-        
-    </div>
-    <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
-        
-        <button [routerLink]="['/linkedIn']" mat-button>LinkedIn </button>
     
+        <button [routerLink]="['/twitter']" mat-button>Twitter </button>            
+        <button [routerLink]="['/linkedIn']" mat-button>LinkedIn </button>
+        
     </div>
-    <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
+    <div> <p >Skrapler</p> </div>
+    <!--<div  ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle mat-button>
             {{user.email}}
         </button>
@@ -17,6 +14,15 @@
             <button ngbDropdownItem routerLink="/login" (click)="logOut()" mat-button>Sign Out</button>
         </div>
     </div>
-
-    <span class="title-center">Skrapler</span>
+    -->
+    <div class="container float-right" ngbDropdown *ngIf="userLogged|async as user">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle mat-button>
+            {{user.email}}
+        </button>
+        
+        <button mat-raised-button color="warn" (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+        
+    </div>
 </mat-toolbar>
