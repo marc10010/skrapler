@@ -54,7 +54,7 @@ import { AuthGuard } from './services/auth.guard';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule
   ],
-  providers: [ AuthGuard],
+  providers: [ AuthGuard, { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
