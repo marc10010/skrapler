@@ -6,3 +6,6 @@ mat-toolbar {
   .title-center {
     margin-left: 550px;
   }
+  .cerrar{
+    align-content: flex-end;
+  }

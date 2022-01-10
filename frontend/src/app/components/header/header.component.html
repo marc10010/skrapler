@@ -1,11 +1,20 @@
-<mat-toolbar color = "primary" class="fixed-header">
-    <ng-template ngIf = "true">
-        <button [routerLink]="['/twitter']" mat-button>Twitter </button>
-    </ng-template>
-
-    <ng-template ngIf = "true">
+<mat-toolbar color = "primary" fxLayoutAlign="space-between center">
+    <div ngbDropdown class="d-inline-block" *ngIf="userLogged|async as user">
+    
+        <button [routerLink]="['/twitter']" mat-button>Twitter </button>            
         <button [routerLink]="['/linkedIn']" mat-button>LinkedIn </button>
-    </ng-template>
+        
+    </div>
+    <div> <span>Skrapler </span></div>
 
-    <span class="title-center">Skrapler</span>
+    <div class="container float-right" ngbDropdown *ngIf="userLogged|async as user">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle mat-button>
+            {{user.email}}
+        </button>
+        
+        <button mat-raised-button color="warn" (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+        
+    </div>
 </mat-toolbar>

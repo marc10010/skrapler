@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <b> Create an account</b>
+    </div>
+    <mat-card class="card-body p-4">
+      <label style="float: left;">Name</label>
+      <input class="form-control m-2" type="email" placeholder="insert your name" [(ngModel)]="usuario.name">
+      <br>
+      <label style="float: left;">Email</label>
+      <input class="form-control m-2" type="email" placeholder="insert your email" [(ngModel)]="usuario.email">
+      <br>
+      <label style="float: left;">Password</label>
+      <input class="form-control m-2" type="password" placeholder="insert your password" [(ngModel)]="usuario.password">
+      <br>
+      <button class="btn btn-primary btn-block m-2" (click)="registrarse()">Register</button>
+      <!-- <button class="btn btn-info btn-block m-2" (click)="IngresarConGoogle()">Ingresar con google</button> -->
+      <label>Do you already have an account? <a routerLink="/login">Sign in</a></label>
+    </mat-card>
+
+
+  </div>
+</div>

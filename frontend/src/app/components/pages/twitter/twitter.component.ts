@@ -11,6 +11,7 @@ import Exporting from 'highcharts/modules/exporting';
 Exporting(Highcharts);
 import { TwitterWordsFilterComponent } from '../../popups/twitter-words-filter/twitter-words-filter.component';
 import { DialogPopUpComponent } from '../../popups/dialog-pop-up/dialog-pop-up.component';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { DialogPopUpComponent } from '../../popups/dialog-pop-up/dialog-pop-up.c
 })
 export class TwitterComponent implements OnInit {
   
+
   word_slide= 0;
   hashtag_slide = 0;
   tag_slide = 0;
