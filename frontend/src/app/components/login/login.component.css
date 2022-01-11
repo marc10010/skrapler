@@ -8,7 +8,7 @@
 }
 
 .title{
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'helvetica';
     color: grey;
     font-weight: bolder;
@@ -21,10 +21,11 @@
     min-width: 350px;
     min-height: 200px;
     align-items: center;
+    box-shadow: 0px 0px 20px 10px rgb(228, 228, 228);
 
     border-collapse:separate;
     border-spacing: 5;
-    border:solid rgb(201, 201, 201) 1px;
+    border:solid rgb(201, 201, 201) 0px;
     border-radius:10px;
 }
 
@@ -32,17 +33,26 @@
     margin-top: 35px;
     min-width: 60%;
     flex-grow: 0.25;
+    border-radius: 10px;
+    border: 0;
 }
 
 .item-2{
     min-width: 60%;
     flex-grow: 0.25;
+    border-radius: 10px;
+    border: 0;
 }
 
 .item-3{
-    padding-top: 5px;
+    margin-top: 10px;
     width: 90px;
     height: 25px;
+    font-weight: bolder;
+    color: white;
+    background-color:  #33a7eb;
+    border: 0;
+    border-radius: 20px;
 }
 
 ::placeholder {
