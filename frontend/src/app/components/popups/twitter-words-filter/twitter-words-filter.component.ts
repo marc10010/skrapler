@@ -60,9 +60,9 @@ export class TwitterWordsFilterComponent implements OnInit {
 
 
   addBlacklistedWord(){
-    console.log(this.words);
-    
-    if(this.words.indexOf(this.wordSelected.Word)){
+    console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);
+    //this.words.indexOf(this.wordSelected.Word)
+    if(this.words.indexOf(this.wordSelected.Word) >=0){
       this.openDialog("Alerta", "La palabra "+this.wordSelected.Word+ " ya existe", false, "aviso", this.wordSelected.Word)
     }
     else{
@@ -124,8 +124,8 @@ export class TwitterWordsFilterComponent implements OnInit {
   goTo(){ 
     console.log(this.wordSelected.Word);    
     this.words = this.wordAll.filter(word => word.Word.toLowerCase().includes(this.wordSelected.Word.toLowerCase() ));
-    if(this.words.length >0) this.table.renderRows();
-    else this.words = this.wordAll;
+     this.table.renderRows();
+    //else this.words = this.wordAll;
   }
 
 
