@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataBaseService } from 'src/app/services/database.service';
@@ -32,21 +33,22 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private database: DataBaseService, private router: Router) { }
 
   registrarse() {
-    const { email, password } = this.usuario;
-    this.authService.register(email, password).then(user => {
-      console.log("Registered: ", user);
-      let list = [...this.usuarios];
-      let existe = list.find(user => user.email == email);
+    if(this.usuario.email=="" && this.usuario.name=="" && this.usuario.password=="" ) return;
+    else{
+      const { email, password } = this.usuario;
+      this.authService.register(email, password).then(user => {
+        console.log("Registered: ", user);
+        let list = [...this.usuarios];
+        let existe = list.find(user => user.email == email);
 
-      if (!existe) {
-        console.log("New User Created")
-        this.database.crear('users', this.usuario);
-      };
+        if (!existe) {
+          console.log("New User Created")
+          this.database.crear('users', this.usuario);
+        };
 
-      this.router.navigate(['/twitter']);
-    }).catch(err => {
-      console.log(err)
-    })
+        this.router.navigate(['/twitter']);
+      }).catch(err => { console.log(err) })
+    }
   }
 
 
