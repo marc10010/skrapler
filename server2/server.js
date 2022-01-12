@@ -4,6 +4,7 @@ const cors = require("cors");
 const {MONGODB} = require("./config.js");
 const mongoose = require('mongoose');
 const BlacklistModel = require("./models/Blacklist");
+const WhitelistModel = require("./models/Whitelist");
 
 const app = express();
 
@@ -90,6 +91,40 @@ app.get('/blacklist/add/:word', function(req, res) {
     });
     newBlacklistedWord.save()
     .then(res.status(200).json({ message: "Blacklisted word added successfully" }))
+    .catch((err) => next(err));
+   
+});
+
+app.get('/whitelist', function(req, res) {
+
+    var wordMap = [];
+    WhitelistModel.find({}, function(err, words ) {
+        if(words){
+            let i= 0;
+            words.forEach(function( word) {
+                wordMap.push({id: i, Word: word.Word});
+                i++;
+            });  
+            res.json(wordMap);    
+        }
+        else res.json({error: err })
+    })
+})
+
+app.get('/whitelist/delete/:word', function(req, res) {
+    
+    WhitelistModel.findOneAndDelete({ Word: req.params.word })
+    .then(res.status(200).json({ message: "Whitelisted word deleted successfully" }))
+   .catch((err) => next(err));
+});
+
+app.get('/whitelist/add/:word', function(req, res) {
+    
+    const newwhitelistedWord = new WhitelistModel({
+      Word: req.params.word  
+    });
+    newwhitelistedWord.save()
+    .then(res.status(200).json({ message: "Whitelisted word added successfully" }))
     .catch((err) => next(err));
    
 });
