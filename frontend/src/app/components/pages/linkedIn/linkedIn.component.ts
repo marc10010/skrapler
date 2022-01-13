@@ -13,6 +13,7 @@ export class LinkedInComponent implements OnInit {
   constructor() { }
 
   inicio = true;
+  nombre: string= "";
 
   jess = false;
   gui = false;
@@ -100,12 +101,15 @@ export class LinkedInComponent implements OnInit {
   RName1= ''
   RWork1= ''
   RText1= ''
+  RData1= ''
   RName2= ''
   RWork2= ''
+  RData2= ''
   RText2= ''
   RName3= ''
   RWork3= ''
   RText3= ''
+  RData3= ''
 
 //------------------------------------------------
 
@@ -205,6 +209,11 @@ export class LinkedInComponent implements OnInit {
   RTextJes7= ''
 
 
+  buscar(){
+    if(this.nombre=="Guillermo Plazas") this.Gui();
+    else if(this.nombre=="Jesica Logioco")this.Jess();
+  }
+
   Gui(){
     this.inicio = false;
     this.gui = true;
@@ -294,14 +303,17 @@ export class LinkedInComponent implements OnInit {
     //-------------------------------------Recomendations Recived--------------------------------------
 
     this.RName1= 'Juliana Moreno Montoya'
+    this.RData1= 'Date: April 16, 2021,'
     this.RWork1= 'MENTORÍA EN DESARROLLO PROFESIONAL | ESTRATEGIA PERSONAL | HOJAS DE VIDA | EVALUACION Y DESARROLLO | SELECCIÓN | TRANSICIÓN DE CARRERA | OUTPLACEMENT | PROCESO DE GESTIÓN LABORALMENTORÍA EN DESARROLLO PROFESIONAL | ESTRATEGIA PERSONAL | HOJAS DE VIDA | EVALUACION Y DESARROLLO | SELECCIÓN | TRANSICIÓN DE CARRERA | OUTPLACEMENT | PROCESO DE GESTIÓN LABORAL'
     this.RText1= 'Guillermo es un Directivo de alto nivel con una marcada orientación al resultado; cuenta con una sólida experiencia liderando estratégicamente áreas de gestión del Talento Humano en los procesos de selección, vinculación, evaluación y desarrollo, planes de carrera, gestión del cambio, gestión de clima y cultura. Adicional con una base administrativa robusta que le permite gestionar procesos de manera exitosa e integral. Es un formador de líderes de alto desempeño.'
 
     this.RName2= 'CAMILO ANDRÉS RODRIGUEZ MURILLO'
+    this.RData2= 'Date: June 25, 2020,'
     this.RWork2= 'Chief Technology Officer - CTO en Gluky GroupChief Technology Officer - CTO en Gluky Group'
     this.RText2= 'Guillermo Plazas es una persona que tienen bastantes habilidades gerenciales, dentro de las que se encuentran: el compromiso al logro, siempre busca alternativas ante los inconvenientes y piensa enfocado en tener soluciones eficaces y efectivas; tiene un gran sentido humano, reconoce que el mayor activo en una organización son las personas; tiene un excelente manejo de terceros, realiza fuertes negociaciones de grandes proyectos enfocado siempre a los objetivos corporativos de la organización; y logra poseer una amplia visión de la compañía lo que le permite saber direccionar y dirigir los esfuerzos de su equipo de forma adecuada, generando motivaciones y sinergias entre los diferentes grupos de trabajo de la compañía.'
 
     this.RName3= 'Cesar Pachón Porras'
+    this.RData3= 'Date: January 31, 2020'
     this.RWork3= 'Coordinador de Desarrollo de Negocios en Aportes en LíneaCoordinador de Desarrollo de Negocios en Aportes en Línea'
     this.RText3= 'Guillermo es una excelente profesional, dando el máximo de sus capacidades como líder y comprometiendo a su equipo de trabajo con la consecución de los objetivos. El sentido humano con las personas y la integridad lo caracterizan.'
 

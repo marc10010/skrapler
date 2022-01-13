@@ -1,12 +1,16 @@
 <div class="container">
     <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="column" *ngIf="inicio">
         <div class="title" >
-            <p>Linkedin Examples</p>
+            <p>Enter the corresponding linkedin username</p>
         </div>
 
         <div class="flex">
-            <button class="button1" (click)="Gui()" mat-button>Example 1 </button>            
-            <button class="button2" (click)="Jess()" mat-button>Example 2 </button>
+            <mat-card-content>
+                <mat-form-field appearance="fill">
+                    <mat-label > @ user</mat-label>
+                    <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
+                </mat-form-field>
+            </mat-card-content>
         </div>
     </div>
     
@@ -21,7 +25,7 @@
                     src="https://media-exp1.licdn.com/dms/image/C4E03AQHlxVyf4C0ctQ/profile-displayphoto-shrink_200_200/0/1581192531024?e=1647475200&v=beta&t=-Nn9EZAL-f_ieFga8j4ekZQjWHlrWtA-8BbFC_wOmkQ"
                 /> 
                 <mat-card-title-group>
-                <mat-card-title class="name">Jesica</mat-card-title>
+                <mat-card-title class="name">Jesica Logioco</mat-card-title>
                 </mat-card-title-group>
             </div>
             <mat-card-subtitle class="about">About</mat-card-subtitle>
@@ -36,9 +40,10 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
                     href="https://www.linkedin.com/in/jesicalogioco-safarigroup/"
                     target="_blank"
+                    color = "primary"
                     >Go to Linkedin</a
                   >
                 </div>
@@ -73,7 +78,8 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
+                    color = "primary"
                     href="https://www.linkedin.com/company/safarigrouphr/"
                     target="_blank"
                     >Go to Linkedin</a
@@ -102,7 +108,8 @@
           <div class="example-label"></div>
           <div class="example-button-row">
             <a
-              mat-stroked-button
+              mat-raised-button
+              color = "primary"
               href="https://www.linkedin.com/school/universidaduces/"
               >Go to Linkedin</a
             >
@@ -127,7 +134,8 @@
           <div class="example-label"></div>
           <div class="example-button-row">
             <a
-              mat-stroked-button
+              mat-raised-button
+              color = "primary"
               href="https://www.linkedin.com/school/centro-de-e-learning-utn-frba/"
               target="_blank"
               >Go to Linkedin</a
@@ -153,7 +161,8 @@
             <div class="example-label"></div>
             <div class="example-button-row">
               <a
-                mat-stroked-button
+                mat-raised-button
+                color = "primary"
                 href="https://www.linkedin.com/school/capacitarte-org/"
                 target="_blank"
                 >Go to Linkedin</a
@@ -310,7 +319,8 @@
               <div class="example-label"></div>
               <div class="example-button-row">
                 <a
-                  mat-stroked-button
+                  mat-raised-button
+                  color = "primary"
                   href="https://www.linkedin.com/in/maurobonadeo/"
                   >Go to Linkedin</a
                 >
@@ -339,7 +349,8 @@
               <div class="example-label"></div>
               <div class="example-button-row">
                 <a
-                  mat-stroked-button
+                  mat-raised-button
+                  color = "primary"
                   href="https://www.linkedin.com/in/her/"
                   target="_blank"
                   >Go to Linkedin</a
@@ -368,7 +379,8 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
+                    color = "primary"
                     href="https://www.linkedin.com/in/joel-reyes-572589b6/"
                     target="_blank"
                     >Go to Linkedin</a
@@ -397,7 +409,8 @@
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/in/hdesouza/"
                         target="_blank"
                         >Go to Linkedin</a
@@ -426,7 +439,8 @@
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/in/andrea-bernacchia-5b926a197/"
                         target="_blank"
                         >Go to Linkedin</a
@@ -455,7 +469,8 @@
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/in/marcela-politi/"
                         target="_blank"
                         >Go to Linkedin</a
@@ -484,7 +499,8 @@
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/in/julieta-labombarda/"
                         target="_blank"
                         >Go to Linkedin</a
@@ -519,7 +535,8 @@
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/in/guillermoplazas-gerente-de-talento-humano/"
                         target="_blank"
                         >Go to Linkedin</a
@@ -556,7 +573,8 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
+                    color = "primary"
                     href="https://www.linkedin.com/company/credifamilia/"
                     target="_blank"
                     >Go to Linkedin</a
@@ -591,7 +609,8 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
+                    color = "primary"
                     href="https://www.linkedin.com/company/aportes-en-linea/"
                     target="_blank"
                     >Go to Linkedin</a
@@ -626,7 +645,8 @@
               <div class="example-label"></div>
               <div class="example-button-row">
                 <a
-                  mat-stroked-button
+                  mat-raised-button
+                  color = "primary"
                   href="https://www.linkedin.com/company/cencosud-s-a-/"
                   target="_blank"
                   >Go to Linkedin</a
@@ -661,7 +681,8 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
+                    color = "primary"
                     href="https://www.linkedin.com/company/fondo-nacional-del-ahorro/"
                     target="_blank"
                     >Go to Linkedin</a
@@ -696,7 +717,8 @@
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/company/contralor-a-general-de-la-rep-blica-de-colombia/"
                         target="_blank"
                         >Go to Linkedin</a
@@ -725,7 +747,8 @@
               <div class="example-label"></div>
               <div class="example-button-row">
                 <a
-                  mat-stroked-button
+                  mat-raised-button
+                  color = "primary"
                   href="https://www.linkedin.com/school/cesa-edu/"
                   >Go to Linkedin</a
                 >
@@ -751,7 +774,8 @@
               <div class="example-label"></div>
               <div class="example-button-row">
                 <a
-                  mat-stroked-button
+                  mat-raised-button
+                  color = "primary"
                   href="https://www.linkedin.com/school/universidad-externado-de-colombia/"
                   target="_blank"
                   >Go to Linkedin</a
@@ -777,7 +801,8 @@
                 <div class="example-label"></div>
                 <div class="example-button-row">
                   <a
-                    mat-stroked-button
+                    mat-raised-button
+                    color = "primary"
                     href="https://www.linkedin.com/school/eneb-escuela-de-negocios-europea-de-barcelona/"
                     target="_blank"
                     >Go to Linkedin</a
@@ -872,7 +897,7 @@
                   />
                 </mat-card-title-group>
                 <mat-card-content>
-                  {{RDataJes1}}
+                  {{RData1}}
                   <br />
                   <br />
                   {{RText1}}
@@ -882,7 +907,8 @@
                   <div class="example-label"></div>
                   <div class="example-button-row">
                     <a
-                      mat-stroked-button
+                      mat-raised-button
+                      color = "primary"
                       href="https://www.linkedin.com/in/julianamorenomontoya-creatalentolatam/"
                       >Go to Linkedin</a
                     >
@@ -901,7 +927,7 @@
                   />
                 </mat-card-title-group>
                 <mat-card-content>
-                  {{RDataJes2}}
+                  {{RData2}}
                   <br />
                   <br />
                   {{RText2}}
@@ -911,7 +937,8 @@
                   <div class="example-label"></div>
                   <div class="example-button-row">
                     <a
-                      mat-stroked-button
+                      mat-raised-button
+                      color = "primary"
                       href="https://www.linkedin.com/in/camilorodriguezm/"
                       target="_blank"
                       >Go to Linkedin</a
@@ -930,17 +957,18 @@
                   />
                 </mat-card-title-group>
                 <mat-card-content>
-                  {{RDataJes3}}
+                  {{RData3}}
                   <br />
                   <br />
-                  {{RTextJes7}}
+                  {{RText3}}
                   <br />
                   <br />
                   <section>
                     <div class="example-label"></div>
                     <div class="example-button-row">
                       <a
-                        mat-stroked-button
+                        mat-raised-button
+                        color = "primary"
                         href="https://www.linkedin.com/in/cesar-pach%C3%B3n-porras-03a25689/"
                         target="_blank"
                         >Go to Linkedin</a
