@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinkedInComponent } from './linkedIn.component';
 
 
-describe('FacebookComponent', () => {
+describe('LinkedinComponent', () => {
   let component: LinkedInComponent;
   let fixture: ComponentFixture<LinkedInComponent>;
 

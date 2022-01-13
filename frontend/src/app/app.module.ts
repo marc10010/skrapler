@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from "@angular/material/dialog";
@@ -47,6 +49,8 @@ import { TwitterWhitelistComponent } from './components/popups/twitter-whitelist
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatTabsModule,
+    MatGridListModule,
     HttpClientModule,
     FlexLayoutModule,
     MatDialogModule,

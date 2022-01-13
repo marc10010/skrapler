@@ -1,8 +1,8 @@
 const { model, Schema} = require('mongoose');
 
 const whitelistSchema = new Schema ({
-    Word: String
-
+    type: String,
+    wordList: [String]
 });
 
 module.exports = model("WhitelistModel", whitelistSchema);

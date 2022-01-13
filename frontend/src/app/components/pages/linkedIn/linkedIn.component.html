@@ -1,3 +1,984 @@
-<div class="middle">
-    <h1>COMING SOON</h1>
+<div class="container">
+    <div fxFlex = "100" fxFlex.sm ="100" fxFlex.xs ="100" fxLayout="column" *ngIf="inicio">
+        <div class="title" >
+            <p>Enter the corresponding linkedin ID</p>
+        </div>
+
+        <div class="flex">
+            <mat-card-content>
+                <mat-form-field appearance="fill">
+                    <mat-label > @ Id</mat-label>
+                    <input [(ngModel)]=nombre name="nombre usuario" matInput type="text" (keyup.enter)="buscar()" >
+                </mat-form-field>
+            </mat-card-content>
+        </div>
+    </div>
+    
+    <!-- *ngIf="tweets.length >0"-->
+    
+    <mat-tab-group *ngIf="!inicio && jess">
+        <mat-tab label="General">
+          <mat-card  style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <div fxLayout="row">
+                <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQHlxVyf4C0ctQ/profile-displayphoto-shrink_200_200/0/1581192531024?e=1647475200&v=beta&t=-Nn9EZAL-f_ieFga8j4ekZQjWHlrWtA-8BbFC_wOmkQ"
+                /> 
+                <mat-card-title-group>
+                <mat-card-title class="name">Jesica Logioco</mat-card-title>
+                </mat-card-title-group>
+            </div>
+            <mat-card-subtitle class="about">About</mat-card-subtitle>
+            <mat-card-content>
+              {{DireccionURLJes}} 
+              <br />
+              <br />
+              {{DescripcionJes}} 
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    href="https://www.linkedin.com/in/jesicalogioco-safarigroup/"
+                    target="_blank"
+                    color = "primary"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Experience">
+        <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>{{Titulo1Jes}}</mat-card-title>
+              <mat-card-subtitle>{{Company1Jes}}</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4D0BAQF0-ZlU-xHRFQ/company-logo_200_200/0/1635522211502?e=1649894400&v=beta&t=mLJMkgf4lrkCAgsUy5Mw3cpsDiGCA1KMxblzqqQQ1dg"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{EDescripcion1Jes}}
+              <br />
+              <br />
+              {{DR1Jes}}
+              <br />
+              <br />
+              {{D1Jes}}
+              <br />
+              <br />
+              {{L1Jes}}
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    color = "primary"
+                    href="https://www.linkedin.com/company/safarigrouphr/"
+                    target="_blank"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+        </mat-card>
+        </mat-tab>
+        <mat-tab label="Education">
+        <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+        <mat-card-title-group>
+          <mat-card-title>{{Titulo1EJes}}
+        </mat-card-title>
+          <mat-card-subtitle>{{Company1EJes}}</mat-card-subtitle>
+          <img
+            mat-card-sm-image
+            src="https://media-exp1.licdn.com/dms/image/C560BAQGnFLB5b0Y82w/company-logo_200_200/0/1638478727843?e=1649894400&v=beta&t=PaOk9r0Z9lma_U20FE6jNoGwFckKLatZ6oaGo9lKdkA"
+          />
+        </mat-card-title-group>
+        <mat-card-content>
+          {{E1Jes}}
+          <br />
+          <br />
+          <section>
+          <div class="example-label"></div>
+          <div class="example-button-row">
+            <a
+              mat-raised-button
+              color = "primary"
+              href="https://www.linkedin.com/school/universidaduces/"
+              >Go to Linkedin</a
+            >
+          </div>
+        </section>
+        </mat-card-content>
+        </mat-card>
+        <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card" >
+        <mat-card-title-group>
+          <mat-card-title>{{Titulo2EJes}}</mat-card-title>
+          <mat-card-subtitle>{{Company2EJes}}</mat-card-subtitle>
+          <img
+            mat-card-sm-image
+            src="https://media-exp1.licdn.com/dms/image/C4E0BAQHvAypiry8QaA/company-logo_200_200/0/1634842512403?e=1649894400&v=beta&t=7Or1VFpA-lRUreUl5V3COfBG-Iz0a-GZPYL0LI4HUZ4"
+          />
+        </mat-card-title-group>
+        <mat-card-content>
+          {{E2Jes}}
+          <br />
+          <br />
+          <section>
+          <div class="example-label"></div>
+          <div class="example-button-row">
+            <a
+              mat-raised-button
+              color = "primary"
+              href="https://www.linkedin.com/school/centro-de-e-learning-utn-frba/"
+              target="_blank"
+              >Go to Linkedin</a
+            >
+          </div>
+        </section>
+        </mat-card-content>
+        </mat-card>
+        <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+        <mat-card-title-group>
+          <mat-card-title>{{Titulo3EJes}}</mat-card-title>
+          <mat-card-subtitle>{{Company3EJes}}</mat-card-subtitle>
+          <img
+            mat-card-sm-image
+            src="https://media-exp1.licdn.com/dms/image/C4E0BAQENYR2aHie16A/company-logo_200_200/0/1537373963091?e=1649894400&v=beta&t=j7pJp980eKLC14M0ZW86vvUNpPs-hRkOj2TB1yOUQt8"
+          />
+        </mat-card-title-group>
+        <mat-card-content>
+          {{E3Jes}}
+          <br />
+          <br />
+          <section>
+            <div class="example-label"></div>
+            <div class="example-button-row">
+              <a
+                mat-raised-button
+                color = "primary"
+                href="https://www.linkedin.com/school/capacitarte-org/"
+                target="_blank"
+                >Go to Linkedin</a
+              >
+            </div>
+          </section>
+        </mat-card-content>
+        </mat-card>
+        </mat-tab>
+        <mat-tab label="Skills">
+            <div fxLayout="row wrap" style="margin: 2em 20em 2em 20em;" class="grid">
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes1}}</mat-card-title>
+                </mat-card>
+                <mat-card  class="exemple-card" >
+                    <mat-card-title>{{SKJes2}}</mat-card-title>
+                </mat-card>
+                <mat-card  class="exemple-card1" >
+                    <mat-card-title>{{SKJes3}}</mat-card-title>
+                </mat-card>
+                <mat-card  class="exemple-card1" >
+                    <mat-card-title>{{SKJes4}}</mat-card-title>
+                </mat-card>
+                <mat-card  class="exemple-card" >
+                    <mat-card-title>{{SKJes5}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes6}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes7}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes8}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes9}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes10}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes11}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes12}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes13}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes14}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes15}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes16}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes17}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes18}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes19}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes20}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes21}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes22}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes23}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes24}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes25}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes26}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes27}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes28}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes29}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes30}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes31}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes32}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes33}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes34}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes35}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes36}}</mat-card-title>
+                </mat-card>
+                <mat-card   class="exemple-card" >
+                    <mat-card-title>{{SKJes37}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes38}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card1" >
+                    <mat-card-title>{{SKJes39}}</mat-card-title>
+                </mat-card>
+                <mat-card class="exemple-card" >
+                    <mat-card-title>{{SKJes40}}</mat-card-title>
+                </mat-card>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Recommendations">
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>{{RNameJes1}}
+            </mat-card-title>
+              <mat-card-subtitle>{{RWorkJes1}}</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E03AQHk8FFiwbLgaw/profile-displayphoto-shrink_200_200/0/1639763430413?e=1647475200&v=beta&t=YCrwXu34QrMZg3UuVa9Ym5xKj2SZCXsO9364NTJBXkc"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{RDataJes1}}
+              <br />
+              <br />
+              {{RTextJes1}}
+              <br />
+              <br />
+              <section>
+              <div class="example-label"></div>
+              <div class="example-button-row">
+                <a
+                  mat-raised-button
+                  color = "primary"
+                  href="https://www.linkedin.com/in/maurobonadeo/"
+                  >Go to Linkedin</a
+                >
+              </div>
+            </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>{{RNameJes2}}</mat-card-title>
+              <mat-card-subtitle>{{RWorkJes2}}
+            </mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E35AQF8eziuYiEI3A/profile-framedphoto-shrink_200_200/0/1610037378187?e=1642096800&v=beta&t=PxUp516xmRyBavFxzkAFt_4m8oA4rZ-2_5JhfymF774"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{RDataJes2}}
+              <br />
+              <br />
+              {{RTextJes2}}
+              <br />
+              <br />
+              <section>
+              <div class="example-label"></div>
+              <div class="example-button-row">
+                <a
+                  mat-raised-button
+                  color = "primary"
+                  href="https://www.linkedin.com/in/her/"
+                  target="_blank"
+                  >Go to Linkedin</a
+                >
+              </div>
+            </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>{{RNameJes3}}</mat-card-title>
+              <mat-card-subtitle>{{RWorkJes3}}</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-20.jpg"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{RDataJes3}}
+              <br />
+              <br />
+              {{RTextJes3}}
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    color = "primary"
+                    href="https://www.linkedin.com/in/joel-reyes-572589b6/"
+                    target="_blank"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RNameJes4}}</mat-card-title>
+                  <mat-card-subtitle>{{RWorkJes4}}</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQF408ZQgzIeZQ/profile-displayphoto-shrink_200_200/0/1641479696428?e=1647475200&v=beta&t=cjOW_0kE0y3C506fB9PHeuwgrobO2CE6KdfIGKIkCqg"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RDataJes4}}
+                  <br />
+                  <br />
+                  {{RTextJes4}}
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/in/hdesouza/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RNameJes5}}</mat-card-title>
+                  <mat-card-subtitle>{{RWorkJes5}}</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4D03AQFSGN3cQKRutA/profile-displayphoto-shrink_200_200/0/1635590985838?e=1647475200&v=beta&t=Fd77LKhORWrAM16LjFUPYCIdTEzvovCbNBeNZsXUDuE"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RDataJes5}}
+                  <br />
+                  <br />
+                  {{RTextJes5}}
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/in/andrea-bernacchia-5b926a197/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RNameJes6}}</mat-card-title>
+                  <mat-card-subtitle>{{RWorkJes6}}</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4D03AQGV8jGoiO2Xcw/profile-displayphoto-shrink_200_200/0/1638575256915?e=1647475200&v=beta&t=wMCLdOodzB2W8lAdziwpf3K4DlBTyIRE145wzJfDQtk"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RDataJes6}}
+                  <br />
+                  <br />
+                  {{RTextJes6}}
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/in/marcela-politi/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RNameJes7}}</mat-card-title>
+                  <mat-card-subtitle>{{RWorkJes7}}</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQHF23JcyAEnIA/profile-displayphoto-shrink_200_200/0/1516608328903?e=1647475200&v=beta&t=_T_dC7zx8GJbLUUXsg6uiEnLT9q3CrxiD0F05i_oVrE"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RDataJes7}}
+                  <br />
+                  <br />
+                  {{RTextJes7}}
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/in/julieta-labombarda/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+            </mat-card>
+            
+        </mat-tab>
+        </mat-tab-group>
+
+
+        <mat-tab-group *ngIf="!inicio && gui">
+            <mat-tab label="General">
+              <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <div fxLayout="row">
+                    <img
+                        mat-card-sm-image
+                        src="https://media-exp1.licdn.com/dms/image/C4E03AQF5qGXAuDdq-w/profile-displayphoto-shrink_200_200/0/1620306870303?e=1647475200&v=beta&t=drxW5c7CDq93-PcVeqIxt-Yb2CQ7jRiUAnYOBo5jzOc"
+                        /> 
+                    <mat-card-title-group>
+                    <mat-card-title class="name">Guillermo Plazas O. - Director de Talento Humano</mat-card-title>
+                    </mat-card-title-group>
+                </div>
+                <mat-card-subtitle class="about">About</mat-card-subtitle>
+                <mat-card-content>
+                  {{DescripcionGui}} 
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/in/guillermoplazas-gerente-de-talento-humano/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+            <mat-tab label="Experience">
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>Gerente de Gestiòn Humana</mat-card-title>
+              <mat-card-subtitle>Credifamilia Compañía de Financiamiento S.A.</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E0BAQFjhW3Q6kT0fw/company-logo_200_200/0/1546957273968?e=1649894400&v=beta&t=DWyR_nwuLLhnDz8ez4Jjd7oYd9Mu1Xy8pzkeedhqZWI"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{EDescripcion1Gui}}
+              <br />
+              <br />
+              {{DR1Gui}}
+              <br />
+              <br />
+              {{D1Gui}}
+              <br />
+              <br />
+              {{L1Gui}}
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    color = "primary"
+                    href="https://www.linkedin.com/company/credifamilia/"
+                    target="_blank"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>Gerente de Recursos Humanos y administrativo</mat-card-title>
+              <mat-card-subtitle>Aportes en Línea</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4D0BAQFVGYHuVaC6-w/company-logo_200_200/0/1587692401391?e=1649894400&v=beta&t=HWTuCSFc19FBrZGBAhcpZsRMSdbwNJz2dXa6XXLQb5M"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{EDescripcion2Gui}}
+              <br />
+              <br />
+              {{DR2Gui}}
+              <br />
+              <br />
+              {{D2Gui}}
+              <br />
+              <br />
+              {{L2Gui}}
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    color = "primary"
+                    href="https://www.linkedin.com/company/aportes-en-linea/"
+                    target="_blank"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>SubGerente General ( Fondo de empleados Jumbo, Metro, Easy)</mat-card-title>
+              <mat-card-subtitle>Cencosud S.A</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E0BAQHPwGe8jr5xsQ/company-logo_200_200/0/1574365733763?e=1649894400&v=beta&t=4diYXbArJdG0d-ilDN0jJK_X7GAHLpkj9BUDwtP2GBA"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{EDescripcion3Gui}}
+              <br />
+              <br />
+              {{DR3Gui}}
+              <br />
+              <br />
+              {{D3Gui}}
+              <br />
+              <br />
+              {{L3Gui}}
+              <br />
+              <br />
+              <section>
+              <div class="example-label"></div>
+              <div class="example-button-row">
+                <a
+                  mat-raised-button
+                  color = "primary"
+                  href="https://www.linkedin.com/company/cencosud-s-a-/"
+                  target="_blank"
+                  >Go to Linkedin</a
+                >
+              </div>
+            </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>Fondo Nacional del Ahorro (Página Oficial)</mat-card-title>
+              <mat-card-subtitle> SubGerente General ( Fondo de empleados Jumbo, Metro, Easy)</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E0BAQHehjaBH1qBgQ/company-logo_200_200/0/1583165842414?e=1649894400&v=beta&t=e3Ic50brCVWZSKLYKbaRKq2pcy6BeZWuqI6YN7eT7Nw"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{EDescripcion4v}}
+              <br />
+              <br />
+              {{DR4Gui}}
+              <br />
+              <br />
+              {{D4Gui}}
+              <br />
+              <br />
+              {{L4Gui}}
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    color = "primary"
+                    href="https://www.linkedin.com/company/fondo-nacional-del-ahorro/"
+                    target="_blank"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>Auditor de procesos de talento humano</mat-card-title>
+                  <mat-card-subtitle> Contraloría General de la República de Colombia</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C560BAQFVEumC_jGVNA/company-logo_200_200/0/1621881274828?e=1649894400&v=beta&t=B43oS5JfiZCU_zc-L5eXHXIg4-ygQ5iU4eIPnW3gZS8"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{EDescripcion5Gui}}
+                  <br />
+                  <br />
+                  {{DR5Gui}}
+                  <br />
+                  <br />
+                  {{D5Gui}}
+                  <br />
+                  <br />
+                  {{L5Gui}}
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/company/contralor-a-general-de-la-rep-blica-de-colombia/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+                </mat-card>
+            </mat-tab>
+            <mat-tab label="Education">
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>Administrador de empresas
+            </mat-card-title>
+              <mat-card-subtitle>CESA</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E0BAQEEu_mVsKhbrQ/company-logo_200_200/0/1615927201943?e=1649894400&v=beta&t=jPzWkim1yyNhHn5a4o9LqRfHiHMs_jY9RNd6ryyEJAQ"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{E1Gui}}
+              <br />
+              <br />
+              <section>
+              <div class="example-label"></div>
+              <div class="example-button-row">
+                <a
+                  mat-raised-button
+                  color = "primary"
+                  href="https://www.linkedin.com/school/cesa-edu/"
+                  >Go to Linkedin</a
+                >
+              </div>
+            </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>Especialización Pensamiento Estratégico y Prospectiva</mat-card-title>
+              <mat-card-subtitle>Universidad Externado de Colombia
+            </mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4D0BAQGi5CRbUpydSw/company-logo_200_200/0/1616194906713?e=1649894400&v=beta&t=VLwXFLJaMj0_b4dCU6kPGX2wq5JdaSbcVLraL9uZfcg"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{E2Gui}}
+              <br />
+              <br />
+              <section>
+              <div class="example-label"></div>
+              <div class="example-button-row">
+                <a
+                  mat-raised-button
+                  color = "primary"
+                  href="https://www.linkedin.com/school/universidad-externado-de-colombia/"
+                  target="_blank"
+                  >Go to Linkedin</a
+                >
+              </div>
+            </section>
+            </mat-card-content>
+            </mat-card>
+            <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+            <mat-card-title-group>
+              <mat-card-title>Maestría en Dirección de Recursos Humanos</mat-card-title>
+              <mat-card-subtitle>ENEB - Escuela de Negocios Europea de Barcelona</mat-card-subtitle>
+              <img
+                mat-card-sm-image
+                src="https://media-exp1.licdn.com/dms/image/C4E0BAQHo72GsHIDlnQ/company-logo_200_200/0/1624370271996?e=1649894400&v=beta&t=erreh4ZAPvHdRK23mS0LWjBKK5n9GyOvHbPpS_Qu4bs"
+              />
+            </mat-card-title-group>
+            <mat-card-content>
+              {{E3Gui}}
+              <br />
+              <br />
+              <section>
+                <div class="example-label"></div>
+                <div class="example-button-row">
+                  <a
+                    mat-raised-button
+                    color = "primary"
+                    href="https://www.linkedin.com/school/eneb-escuela-de-negocios-europea-de-barcelona/"
+                    target="_blank"
+                    >Go to Linkedin</a
+                  >
+                </div>
+              </section>
+            </mat-card-content>
+            </mat-card>
+            </mat-tab>
+            <mat-tab label="Skills">
+                <div fxLayout="row wrap" style="margin: 2em 20em 2em 20em;" class="grid">
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu1}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card1" >
+                        <mat-card-title>{{SKGu2}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu3}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu4}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu5}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu6}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card1" >
+                        <mat-card-title>{{SKGu7}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu8}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu9}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu10}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card1" >
+                        <mat-card-title>{{SKGu11}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu12}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu13}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu14}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card1" >
+                        <mat-card-title>{{SKGu15}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu16}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu17}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu18}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu19}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card1" >
+                        <mat-card-title>{{SKGu20}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu21}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card" >
+                        <mat-card-title>{{SKGu22}}</mat-card-title>
+                    </mat-card>
+                    <mat-card class="exemple-card1" >
+                        <mat-card-title>{{SKGu23}}</mat-card-title>
+                    </mat-card>
+                </div>
+            </mat-tab>
+            <mat-tab label="Recommendations">
+                <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RName1}}
+                </mat-card-title>
+                  <mat-card-subtitle>{{RWork1}}</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQFX6p4CZQrmyA/profile-displayphoto-shrink_200_200/0/1601648056384?e=1647475200&v=beta&t=pb1b7cp6UTFwA5wEDvNJyxzKmA6B_a6a_24ZQ17-KCA"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RData1}}
+                  <br />
+                  <br />
+                  {{RText1}}
+                  <br />
+                  <br />
+                  <section>
+                  <div class="example-label"></div>
+                  <div class="example-button-row">
+                    <a
+                      mat-raised-button
+                      color = "primary"
+                      href="https://www.linkedin.com/in/julianamorenomontoya-creatalentolatam/"
+                      >Go to Linkedin</a
+                    >
+                  </div>
+                </section>
+                </mat-card-content>
+                </mat-card>
+                <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RName2}}</mat-card-title>
+                  <mat-card-subtitle>{{RWork2}}
+                </mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQEaRuJrCnkMqA/profile-displayphoto-shrink_200_200/0/1622907830620?e=1647475200&v=beta&t=4Ht6FtVhD4o813alwnRWxvVj-4XFXO6qx1jnhXZKVX4"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RData2}}
+                  <br />
+                  <br />
+                  {{RText2}}
+                  <br />
+                  <br />
+                  <section>
+                  <div class="example-label"></div>
+                  <div class="example-button-row">
+                    <a
+                      mat-raised-button
+                      color = "primary"
+                      href="https://www.linkedin.com/in/camilorodriguezm/"
+                      target="_blank"
+                      >Go to Linkedin</a
+                    >
+                  </div>
+                </section>
+                </mat-card-content>
+                </mat-card>
+                <mat-card style="margin: 2em 20em 2em 20em;" class="exemple-card">
+                <mat-card-title-group>
+                  <mat-card-title>{{RName3}}</mat-card-title>
+                  <mat-card-subtitle>{{RWork3}}</mat-card-subtitle>
+                  <img
+                    mat-card-sm-image
+                    src="https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-20.jpg"
+                  />
+                </mat-card-title-group>
+                <mat-card-content>
+                  {{RData3}}
+                  <br />
+                  <br />
+                  {{RText3}}
+                  <br />
+                  <br />
+                  <section>
+                    <div class="example-label"></div>
+                    <div class="example-button-row">
+                      <a
+                        mat-raised-button
+                        color = "primary"
+                        href="https://www.linkedin.com/in/cesar-pach%C3%B3n-porras-03a25689/"
+                        target="_blank"
+                        >Go to Linkedin</a
+                      >
+                    </div>
+                  </section>
+                </mat-card-content>
+                </mat-card>
+            </mat-tab>
+            </mat-tab-group>
+
+
 </div>

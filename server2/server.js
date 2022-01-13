@@ -82,7 +82,7 @@ app.get('/blacklist/delete/:word', function(req, res) {
     BlacklistModel.findOneAndDelete({ Word: req.params.word })
     .then(res.status(200).json({ message: "Blacklisted word deleted successfully" }))
    .catch((err) => next(err));
-});
+})
 
 app.get('/blacklist/add/:word', function(req, res) {
     
@@ -93,7 +93,7 @@ app.get('/blacklist/add/:word', function(req, res) {
     .then(res.status(200).json({ message: "Blacklisted word added successfully" }))
     .catch((err) => next(err));
    
-});
+})
 
 app.get('/whitelist', function(req, res) {
 
@@ -111,23 +111,57 @@ app.get('/whitelist', function(req, res) {
     })
 })
 
-app.get('/whitelist/delete/:word', function(req, res) {
-    
-    WhitelistModel.findOneAndDelete({ Word: req.params.word })
-    .then(res.status(200).json({ message: "Whitelisted word deleted successfully" }))
-   .catch((err) => next(err));
-});
-
-app.get('/whitelist/add/:word', function(req, res) {
+app.get('/whitelist/add/type/:type', function(req, res) {
     
     const newwhitelistedWord = new WhitelistModel({
-      Word: req.params.word  
+      type: req.params.type,
+      wordList: [String]  
     });
     newwhitelistedWord.save()
+    .then(res.status(200).json({ message: "Whitelisted type added successfully" }))
+    .catch((err) => next(err));
+   
+})
+
+app.get('/whitelist/delete/type/:type', function(req, res) {
+    
+    WhitelistModel.findOneAndDelete({ type: req.params.type })
+    .then(res.status(200).json({ message: "Whitelisted type deleted successfully" }))
+   .catch((err) => next(err));
+})
+
+app.get('/whitelist/delete/type/:type/words/:word', function(req, res) {
+    
+    WhitelistModel.findOneAndUpdate(
+        {
+            type: req.params.type,
+        },
+        {
+            $pull: {
+                wordList: req.params.word,
+            }
+        }
+    )
+    .then(res.status(200).json({ message: "Whitelisted word deleted successfully" }))
+    .catch((err) => next(err));
+})
+
+app.get('/whitelist/add/type/:type/words/:word', function(req, res) {
+    
+    WhitelistModel.findOneAndUpdate(
+        {
+            type: req.params.type,
+        },
+        {
+            $addToSet: {
+                wordList: req.params.word,
+            }
+        }
+    )
     .then(res.status(200).json({ message: "Whitelisted word added successfully" }))
     .catch((err) => next(err));
    
-});
+})
 
 mongoose 
   .connect(MONGODB)
