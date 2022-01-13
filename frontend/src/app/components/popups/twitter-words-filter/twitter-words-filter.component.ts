@@ -60,18 +60,22 @@ export class TwitterWordsFilterComponent implements OnInit {
 
 
   addBlacklistedWord(){
-    console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);
-    //this.words.indexOf(this.wordSelected.Word)
-    if(this.words.indexOf(this.wordSelected.Word) >=0){
+    let trobat = false;
+    this.words.forEach(wordtuple => { if(wordtuple.Word == this.wordSelected.Word) trobat = true; })
+    console.log(trobat);
+    if(trobat){
       this.openDialog("Alerta", "La palabra "+this.wordSelected.Word+ " ya existe", false, "aviso", this.wordSelected.Word)
     }
     else{
       this.apiMongo.addBlacklistedWord(this.wordSelected.Word).subscribe(data=> {
         this.apiMongo.getBlackList().subscribe(data => {
           this.words = data;
+          console.log(this.words);
         });
       });
     } 
+    
+    this.table.renderRows();
   }
 
 
@@ -97,6 +101,7 @@ export class TwitterWordsFilterComponent implements OnInit {
 
   
   deleteBlacklistedWord(word: string){
+    console.log("delete",  )
     this.apiMongo.deleteBlacklistedWord(word).subscribe(data=> {
       this.apiMongo.getBlackList().subscribe(data => {
         this.words = data;
