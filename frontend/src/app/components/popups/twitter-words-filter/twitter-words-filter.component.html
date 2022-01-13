@@ -53,7 +53,7 @@
     </form>
 
     <div class="tabla">
-        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init standar-table-mecanoviga" fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
+        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init" fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
             
             
             <ng-container matColumnDef="id" fxFlex="1" fxFlex.sm="1" fxFlex.xs="1">
@@ -70,7 +70,7 @@
                 </td>
             </ng-container>
            
-            <!-- Oferta Column -->
+
             <ng-container matColumnDef=word fxFlex="89" fxFlex.sm="89" fxFlex.xs="89">
                 <th mat-header-cell *matHeaderCellDef> word </th>
                 <td mat-cell *matCellDef="let element" align="left"> {{element.Word}} </td>

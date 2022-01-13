@@ -1,0 +1,55 @@
+.container {
+    width:1100px;
+    display: flex;
+    flex-direction: row;
+}
+
+.input {
+    margin: 0px 10px;
+    flex: 1 1 auto;
+    max-width: 90%;
+    max-height: 55px !important;
+    display: flex;
+}
+
+.input__mitad {
+    margin: 10px 10px;
+    flex: 1 1 auto;
+    max-width: 40%;
+    max-height: 55px !important;
+    display: flex;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+button{
+    float: right;
+    top: 0;
+    right: 0;
+}
+
+table {
+    width: 100%;
+  }
+
+.mat-checkbox {
+    margin: 10px;
+}
+
+.tabla{
+    height: calc(100% - 160px);    
+}
+
+.mantenimiento {
+    margin: 0 -24px;
+    padding: 0 24px;
+    max-height: 82vh;
+    overflow: auto;
+}
+
+#id {
+    flex: 0 0 8% ;
+    width: 10%;
+  }

@@ -102,7 +102,7 @@ app.get('/whitelist', function(req, res) {
         if(words){
             let i= 0;
             words.forEach(function( word) {
-                wordMap.push({id: i, Word: word.Word});
+                wordMap.push({id: i, type: word.type, wordlist: word.wordList});
                 i++;
             });  
             res.json(wordMap);    
@@ -115,7 +115,7 @@ app.get('/whitelist/add/type/:type', function(req, res) {
     
     const newwhitelistedWord = new WhitelistModel({
       type: req.params.type,
-      wordList: [String]  
+      wordList: []
     });
     newwhitelistedWord.save()
     .then(res.status(200).json({ message: "Whitelisted type added successfully" }))

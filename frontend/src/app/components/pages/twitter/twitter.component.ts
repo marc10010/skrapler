@@ -366,6 +366,8 @@ export class TwitterComponent implements OnInit {
   
   newChart(){
 
+    const that = this;
+
     this.chart = new Chart({
       chart: {     
         type: 'packedbubble',
@@ -379,6 +381,24 @@ export class TwitterComponent implements OnInit {
           pointFormat: '<b>{point.name}:</b> {point.value}</sub>'
       },
       plotOptions: {
+          series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                    click: function() {
+                      if(this.name != "undefined"){
+                        that.filterWord = this.name;
+                        that.apiTwitter.obtenerTweetsRetweets(that.nombre).subscribe(data=> {
+                          that.tweets = data;
+                          that.tweetsOriginal = data;
+                          that.tweets = that.tweetsOriginal.filter(tweet => ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(that.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(that.filterWord.toLowerCase()) ) ) );    
+                          console.log("done", that.tweets);
+                        });
+                      }
+                    }
+                }
+            }
+          },
           packedbubble: {
               draggable: false,
               allowPointSelect: true,
@@ -414,8 +434,11 @@ export class TwitterComponent implements OnInit {
     },
       series: []
     });
-    
+
   }
+
+    
+
 
   openDialog(title: string, msg: string, cancelBtn: boolean, tipo: any, word:string) {
     const dialogRef = this.dialog.open(DialogPopUpComponent, {
