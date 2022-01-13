@@ -1,0 +1,119 @@
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogPopUpComponent } from '../dialog-pop-up/dialog-pop-up.component';
+import { MatTable } from '@angular/material/table';
+import { PopupBlacklistTwitter, PopUpWordMapTwitter } from 'src/app/types/global';
+import { ApiMongo } from 'src/app/services/api.mongo';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
+
+
+@Component({
+  selector: 'app-twitter-whitelist',
+  templateUrl: './twitter-whitelist.component.html',
+  styleUrls: ['./twitter-whitelist.component.css']
+})
+export class TwitterWhitelistComponent implements OnInit {
+  NewWhiteListShow: boolean = false;   
+
+  
+  words: PopupBlacklistTwitter[] = [];
+  wordAll: PopupBlacklistTwitter[] = [];
+
+
+  displayedColumns: string[] = ['buttons', "word"];
+  @ViewChild(MatTable) table!: MatTable<any>;
+  constructor(
+    private apiMongo: ApiMongo,
+    public dialog: MatDialogRef<TwitterWhitelistComponent>,
+    public dialogVerificar: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: PopUpWordMapTwitter
+ 
+    ) {   }
+
+  ngOnInit(): void {
+    this.NewWhiteListShow  =false;
+
+    
+  }
+
+
+  newWhiteListShow(){
+    this.NewWhiteListShow = !this.NewWhiteListShow;
+  }
+
+  addBlacklistedWord(){
+    /*console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);
+    //this.words.indexOf(this.wordSelected.Word)
+    if(this.words.indexOf(this.wordSelected.Word) >=0){
+      this.openDialog("Alerta", "La palabra "+this.wordSelected.Word+ " ya existe", false, "aviso", this.wordSelected.Word)
+    }
+    else{
+      this.apiMongo.addBlacklistedWord(this.wordSelected.Word).subscribe(data=> {
+        this.apiMongo.getBlackList().subscribe(data => {
+          this.words = data;
+        });
+      });
+    }
+    */ 
+  }
+
+
+  dialogEliminarUnCampo(event: any, word: any) {
+    
+   /* console.log(this.wordSelected)
+    this.openDialog("ELIMINAR", "¿Quiere eliminar " + word.Word + "?", true, "eliminar", word.Word );
+    event.stopPropagation();
+    */
+  }
+  openDialog(title: string, msg: string, cancelBtn: boolean, tipo: any, word:string) {
+    const dialogRef = this.dialogVerificar.open(DialogPopUpComponent, {
+      data: { title: title, msg: msg, cancelBtn: cancelBtn },
+      disableClose: true
+      
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog result:", result);
+      if (result && tipo == "eliminar") this.deleteBlacklistedWord(word);
+    });
+  }
+
+  
+  deleteBlacklistedWord(word: string){
+    this.apiMongo.deleteBlacklistedWord(word).subscribe(data=> {
+      this.apiMongo.getBlackList().subscribe(data => {
+        this.words = data;
+      });
+    }); 
+
+  }
+
+
+  resetItem() {
+    this.goTo();
+    
+  }
+  test(){
+   
+   /* console.log("close");
+    this.dialog.close({
+      word_slider: this.word_slider, 
+      hashtag_slider: this.hashtag_slider,
+      tag_slider: this.tag_slider
+      });
+      */
+  }
+
+  goTo(){ 
+    /*
+    console.log(this.wordSelected.Word);    
+    this.words = this.wordAll.filter(word => word.Word.toLowerCase().includes(this.wordSelected.Word.toLowerCase() ));
+     this.table.renderRows();
+    //else this.words = this.wordAll;
+    */
+  }
+
+}

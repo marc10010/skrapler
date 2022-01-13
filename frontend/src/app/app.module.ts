@@ -26,6 +26,7 @@ import { environment } from 'src/environments/environment';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './services/auth.guard';
+import { TwitterWhitelistComponent } from './components/popups/twitter-whitelist/twitter-whitelist.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AuthGuard } from './services/auth.guard';
     TwitterWordsFilterComponent,
     DialogPopUpComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TwitterWhitelistComponent
   ],
   imports: [
     BrowserModule,

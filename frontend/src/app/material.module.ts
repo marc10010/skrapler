@@ -13,6 +13,9 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -31,6 +34,9 @@ const modulosMaterial = [
     MatMenuModule,
     MatTableModule,
     MatSliderModule,
+    MatCheckboxModule,
+    MatGridListModule,
+    MatSelectModule
 ]
 
 @NgModule({

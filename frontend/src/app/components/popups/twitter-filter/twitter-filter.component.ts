@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { PopupFilterTwitter }from 'src/app/types/global';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { TwitterWhitelistComponent } from '../twitter-whitelist/twitter-whitelist.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class TwitterFilterComponent implements OnInit {
   
   constructor(
     public dialogRef: MatDialogRef<TwitterFilterComponent>,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: PopupFilterTwitter
   ) { }
   minDate = new Date();
@@ -41,6 +43,20 @@ export class TwitterFilterComponent implements OnInit {
   minDateFunction(a: Date, b: Date){
     if(a < b) return a;
     return b;
+  }
+  
+
+
+  openDialogWhitelist(){
+    const dialogRef = this.dialog.open(TwitterWhitelistComponent, {
+      width: '40%',
+      height: '95%',
+      disableClose: true,
+     });
+    /*dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog result:", result);
+    });
+    */
   }
   
 }

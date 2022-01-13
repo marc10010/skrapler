@@ -2,58 +2,43 @@
     <mat-icon>close</mat-icon>
 </button>
 
-<h1 mat-dialog-title >WordMap settings</h1>    
+<h1 mat-dialog-title >WordMap settings</h1>
 <mat-dialog-content class="mantenimiento">
-    <div class="configSlider">
-        <label>Number of Words</label>
-        <mat-slider
-            [displayWith]="word"
-            tickInterval="1"
-            step="1"
-            min="10"
-            max="50"
-            aria-label="units"
-            [(ngModel)]= "word_slider">
-        </mat-slider>
-        <label>{{word_slider}}</label>
-        <br>
-        <label>Number of Hashtags</label>
-        <mat-slider
-            [displayWith]="hashtag"
-            tickInterval="1"
-            step="1"
-            min="0"
-            max="30"
-            aria-label="units"
-            [(ngModel)]= "hashtag_slider">
-        </mat-slider>
-        <label>{{hashtag_slider}}</label>
-        <br>
-        <label>Number of tags </label>
-        <mat-slider
-            [displayWith]="tag"
-            tickInterval="1"
-            step="1"
-            min="0"
-            max="30"
-            aria-label="units"
-            [(ngModel)]= "tag_slider">
-        </mat-slider>
-        <label>{{tag_slider}}</label>
-    </div>
     <form >
-        <mat-form-field fxFlex="100" appearance="outline">
+        <mat-form-field appearance="fill" >
+            <mat-label>Choose an option</mat-label>
+            <mat-select>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button  
+        matSuffix  (click)="newWhiteListShow()"><mat-icon>add</mat-icon> New Whitelist</button>
+
+        <mat-form-field *ngIf="NewWhiteListShow"   appearance="outline">
+            
+            <mat-label>Whitelist </mat-label>
+            <input name="Whitelist name" matInput type="text" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
+            <!--*ngIf="wordSelected.Word"-->
+        </mat-form-field>
+
+        <br>        
+        <mat-form-field  appearance="outline">
             <mat-label>Word</mat-label>
             <input required  
-                [(ngModel)]="wordSelected.Word" name="word" matInput type="text" (ngModelChange)="goTo()" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
-            <button  mat-button *ngIf="wordSelected.Word" matSuffix mat-icon-button aria-label="Clear"
+                 name="word" matInput type="text" (ngModelChange)="goTo()" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
+            <!--*ngIf="wordSelected.Word"-->
+                <button  mat-button  matSuffix mat-icon-button aria-label="Clear"
                 (click)="resetItem()"><mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
     </form>
+    <br>
 
-    <div class="tabla">
-        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init" fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
+    <div class="tabla" >
+        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init" fxFlex="100" fxFlex.sm="80" fxFlex.xs="80">
             
             
             <ng-container matColumnDef="id" fxFlex="1" fxFlex.sm="1" fxFlex.xs="1">

@@ -27,3 +27,12 @@ form {
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 16px;
   }
+
+  mat-grid-list{
+    flex: 1 1 50%;
+    box-sizing: border-box;
+    max-width: 50%;
+    flex-flow: row wrap;
+    display: flex;
+    padding-bottom: 80px !important;
+  }
