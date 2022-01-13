@@ -16,7 +16,8 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class TwitterWhitelistComponent implements OnInit {
   NewWhiteListShow: boolean = false; 
-  whiteListName: string ="";  
+  whiteListName: string ="";
+  WhiteListList: any[];
 
   
   words: PopupBlacklistTwitter[] = [];
@@ -36,6 +37,7 @@ export class TwitterWhitelistComponent implements OnInit {
   ngOnInit(): void {
     this.NewWhiteListShow  =false;
     this.whiteListName="";
+    this.WhiteListList 
     
   }
 
@@ -48,14 +50,16 @@ export class TwitterWhitelistComponent implements OnInit {
     
   }
   addwhiteListedName(){
-    console.log(this.whiteListName)
-    /*console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);
-    //this.words.indexOf(this.wordSelected.Word)
-    if(this.words.indexOf(this.wordSelected.Word) >=0){
-      this.openDialog("Alerta", "La palabra "+this.wordSelected.Word+ " ya existe", false, "aviso", this.wordSelected.Word)
+    console.log(this.whiteListName);
+    /*console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);*/
+    let trobat = false;
+    this.WhiteListList.forEach(wordtuple => { if(wordtuple.Word == this.whiteListName) trobat = true; })
+    
+    if(trobat){
+      this.openDialog("Alerta", "La palabra "+this.whiteListName+ " ya existe", false, "aviso", this.whiteListName)
     }
     else{
-      this.apiMongo.addBlacklistedWord(this.wordSelected.Word).subscribe(data=> {
+      this.apiMongo.addBlacklistedWord(this.whiteListName).subscribe(data=> {
         this.apiMongo.getBlackList().subscribe(data => {
           this.words = data;
         });

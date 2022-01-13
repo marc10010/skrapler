@@ -20,7 +20,7 @@
         <mat-form-field *ngIf="NewWhiteListShow"   appearance="outline">
             
             <mat-label>Whitelist </mat-label>
-            <input name="Whitelist name" (ngModel)="whiteListName" matInput type="text" (keydown.enter)= "addwhiteListedName()"> <!--(ngModelChange)="goTo()"-->
+            <input name="Whitelist name" [(ngModel)]="whiteListName" matInput type="text" (keydown.enter)= "addwhiteListedName()"> <!--(ngModelChange)="goTo()"-->
             <!--*ngIf="wordSelected.Word"-->
         </mat-form-field>
 
