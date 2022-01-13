@@ -391,7 +391,7 @@ export class TwitterComponent implements OnInit {
                         that.apiTwitter.obtenerTweetsRetweets(that.nombre).subscribe(data=> {
                           that.tweets = data;
                           that.tweetsOriginal = data;
-                          that.tweets = that.tweetsOriginal.filter(tweet => (new Date(tweet.created_at) <= that.dateTo && new Date(tweet.created_at) >= that.dateFrom) && ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(that.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(that.filterWord.toLowerCase()) ) ) );    
+                          that.tweets = that.tweetsOriginal.filter(tweet => ((tweet.retweeted_status==undefined && tweet.full_text.toLowerCase().includes(that.filterWord.toLowerCase())) ||(tweet.retweeted_status!=undefined && tweet.retweeted_status.full_text.toLowerCase().includes(that.filterWord.toLowerCase()) ) ) );    
                           console.log("done", that.tweets);
                         });
                       }

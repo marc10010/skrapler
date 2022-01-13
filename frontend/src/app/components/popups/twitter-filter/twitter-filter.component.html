@@ -40,18 +40,6 @@
             <mat-label> key word</mat-label>
             <input [(ngModel)]=word name="word" matInput type="text"  >
         </mat-form-field> 
-        <mat-grid-list fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" fxLayout ="row wrap"  cols="2" rowHeight="0.5:0.5">
-            <mat-grid-tile style="height: fit-content;">
-                
-                <section >
-                    <mat-checkbox>I want to use </mat-checkbox>
-                </section> 
-            </mat-grid-tile>
-            <mat-grid-tile style="height: fit-content;">
-                <button mat-button (click) = "openDialogWhitelist()">select whitelist </button>
-        
-            </mat-grid-tile>
-        </mat-grid-list>
         
     </form> 
 

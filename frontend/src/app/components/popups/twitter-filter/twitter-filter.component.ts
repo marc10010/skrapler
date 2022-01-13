@@ -2,7 +2,6 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { PopupFilterTwitter }from 'src/app/types/global';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { TwitterWhitelistComponent } from '../twitter-whitelist/twitter-whitelist.component';
 
 
 @Component({
@@ -47,16 +46,6 @@ export class TwitterFilterComponent implements OnInit {
   
 
 
-  openDialogWhitelist(){
-    const dialogRef = this.dialog.open(TwitterWhitelistComponent, {
-      width: '40%',
-      height: '95%',
-      disableClose: true,
-     });
-    /*dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog result:", result);
-    });
-    */
-  }
+  
   
 }
