@@ -115,7 +115,7 @@ app.get('/whitelist/add/type/:type', function(req, res) {
     
     const newwhitelistedWord = new WhitelistModel({
       type: req.params.type,
-      worldList: [String]  
+      wordList: [String]  
     });
     newwhitelistedWord.save()
     .then(res.status(200).json({ message: "Whitelisted type added successfully" }))
@@ -138,7 +138,7 @@ app.get('/whitelist/delete/type/:type/words/:word', function(req, res) {
         },
         {
             $pull: {
-                worldList: req.params.word,
+                wordList: req.params.word,
             }
         }
     )
@@ -154,7 +154,7 @@ app.get('/whitelist/add/type/:type/words/:word', function(req, res) {
         },
         {
             $addToSet: {
-                worldList: req.params.word,
+                wordList: req.params.word,
             }
         }
     )
