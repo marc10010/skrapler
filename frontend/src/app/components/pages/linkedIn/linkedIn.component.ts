@@ -210,8 +210,8 @@ export class LinkedInComponent implements OnInit {
 
 
   buscar(){
-    if(this.nombre=="Guillermo Plazas") this.Gui();
-    else if(this.nombre=="Jesica Logioco")this.Jess();
+    if(this.nombre=="guillermoplazas-gerente-de-talento-humano") this.Gui();
+    else if(this.nombre=="jesicalogioco-safarigroup")this.Jess();
   }
 
   Gui(){

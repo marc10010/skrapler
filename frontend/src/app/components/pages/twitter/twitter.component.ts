@@ -385,6 +385,7 @@ export class TwitterComponent implements OnInit {
               minSize: '40%',
               maxSize: '100%',
               layoutAlgorithm: {
+                  enableSimulation: false,
                   gravitationalConstant: 0.05,
                   splitSeries: "true",
                   seriesInteraction: false,
