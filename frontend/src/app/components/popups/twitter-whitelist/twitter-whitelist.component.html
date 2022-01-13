@@ -20,7 +20,7 @@
         <mat-form-field *ngIf="NewWhiteListShow"   appearance="outline">
             
             <mat-label>Whitelist </mat-label>
-            <input name="Whitelist name" matInput type="text" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
+            <input name="Whitelist name" (ngModel)="whiteListName" matInput type="text" (keydown.enter)= "addwhiteListedName()"> <!--(ngModelChange)="goTo()"-->
             <!--*ngIf="wordSelected.Word"-->
         </mat-form-field>
 
@@ -28,7 +28,7 @@
         <mat-form-field  appearance="outline">
             <mat-label>Word</mat-label>
             <input required  
-                 name="word" matInput type="text" (ngModelChange)="goTo()" (keydown.enter)= " addBlacklistedWord()"> <!--(ngModelChange)="goTo()"-->
+                 name="word" matInput type="text" (ngModelChange)="goTo()" (keydown.enter)= " addwhiteListedWord()"> <!--(ngModelChange)="goTo()"-->
             <!--*ngIf="wordSelected.Word"-->
                 <button  mat-button  matSuffix mat-icon-button aria-label="Clear"
                 (click)="resetItem()"><mat-icon>close</mat-icon>

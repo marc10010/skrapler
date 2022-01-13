@@ -15,7 +15,8 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./twitter-whitelist.component.css']
 })
 export class TwitterWhitelistComponent implements OnInit {
-  NewWhiteListShow: boolean = false;   
+  NewWhiteListShow: boolean = false; 
+  whiteListName: string ="";  
 
   
   words: PopupBlacklistTwitter[] = [];
@@ -34,7 +35,7 @@ export class TwitterWhitelistComponent implements OnInit {
 
   ngOnInit(): void {
     this.NewWhiteListShow  =false;
-
+    this.whiteListName="";
     
   }
 
@@ -43,7 +44,11 @@ export class TwitterWhitelistComponent implements OnInit {
     this.NewWhiteListShow = !this.NewWhiteListShow;
   }
 
-  addBlacklistedWord(){
+  addwhiteListedWord(){
+    
+  }
+  addwhiteListedName(){
+    console.log(this.whiteListName)
     /*console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);
     //this.words.indexOf(this.wordSelected.Word)
     if(this.words.indexOf(this.wordSelected.Word) >=0){
