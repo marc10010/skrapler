@@ -35,4 +35,33 @@ import { ApiResponse } from '../types/api';
         });
     }
 
+    getWhiteList(){
+      return this.http.get<any>('http://localhost:3000/whitelist', 
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });   
+    }
+
+    addWhitelistedWord(word: any){
+      return this.http.get<any[]>('http://localhost:3000/whitelist/add/type/' + word,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
+
+    deleteWhiteListedWord(type: any, word: any){
+      return this.http.get<any[]>('http://localhost:3000/whitelist/delete/type/'+ type+'/words/' + word,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
+    
+    addWhiteListedTypeWord(type: any, word: any){
+      return this.http.get<any[]>('http://localhost:3000/whitelist/add/type/'+ type+'/words/' + word,
+      { headers: {'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'}
+        });
+    }
+    
+
   }  

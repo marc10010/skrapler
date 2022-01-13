@@ -38,13 +38,10 @@
     <br>
 
     <div class="tabla" >
-        <table mat-table [dataSource]="words"  class="mat-elevation-z8 tabla-boton-init" fxFlex="100" fxFlex.sm="80" fxFlex.xs="80">
+        <table mat-table [dataSource]="wordlist"  class="mat-elevation-z8 tabla-boton-init" fxFlex="100" fxFlex.sm="80" fxFlex.xs="80">
             
             
-            <ng-container matColumnDef="id" fxFlex="1" fxFlex.sm="1" fxFlex.xs="1">
-                <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
-            </ng-container>
-
+           
             <ng-container matColumnDef="buttons" fxFlex="10" fxFlex.sm="10" fxFlex.xs="10" >
                 <th mat-header-cell *matHeaderCellDef >        
                 </th>
@@ -56,9 +53,9 @@
             </ng-container>
            
 
-            <ng-container matColumnDef=word fxFlex="89" fxFlex.sm="89" fxFlex.xs="89">
+            <ng-container matColumnDef= fxFlex="89" fxFlex.sm="89" fxFlex.xs="89">
                 <th mat-header-cell *matHeaderCellDef> word </th>
-                <td mat-cell *matCellDef="let element" align="left"> {{element.Word}} </td>
+                <td mat-cell *matCellDef="let element" align="left"> {{element}} </td>
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

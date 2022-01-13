@@ -2,8 +2,8 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogPopUpComponent } from '../dialog-pop-up/dialog-pop-up.component';
 import { MatTable } from '@angular/material/table';
-import { PopupBlacklistTwitter, PopUpWordMapTwitter } from 'src/app/types/global';
-import { ApiMongo } from 'src/app/services/api.mongo';
+import { PopupBlacklistTwitter, PopUpWordMapTwitter } from '../../../types/global';
+import { ApiMongo } from '../../../services/api.mongo';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
@@ -17,11 +17,10 @@ import {map, startWith} from 'rxjs/operators';
 export class TwitterWhitelistComponent implements OnInit {
   NewWhiteListShow: boolean = false; 
   whiteListName: string ="";
-  WhiteListList: any[];
-
+  WhiteListList: any[]= [];
+  wordlist: any[] = [];
   
-  words: PopupBlacklistTwitter[] = [];
-  wordAll: PopupBlacklistTwitter[] = [];
+
 
 
   displayedColumns: string[] = ['buttons', "word"];
@@ -37,7 +36,13 @@ export class TwitterWhitelistComponent implements OnInit {
   ngOnInit(): void {
     this.NewWhiteListShow  =false;
     this.whiteListName="";
-    this.WhiteListList 
+    this.apiMongo.getWhiteList().subscribe(data => {
+      this.WhiteListList = data;
+      console.log(this.WhiteListList)
+      this.wordlist = this.WhiteListList[0].wordlist
+      console.log(this.wordlist)
+    
+    });
     
   }
 
@@ -53,19 +58,23 @@ export class TwitterWhitelistComponent implements OnInit {
     console.log(this.whiteListName);
     /*console.log(this.words, this.words.indexOf(this.wordSelected.Word), this.word.length);*/
     let trobat = false;
-    this.WhiteListList.forEach(wordtuple => { if(wordtuple.Word == this.whiteListName) trobat = true; })
+    this.WhiteListList.forEach(wordtuple => { if(wordtuple == this.whiteListName) trobat = true; })
     
     if(trobat){
       this.openDialog("Alerta", "La palabra "+this.whiteListName+ " ya existe", false, "aviso", this.whiteListName)
     }
     else{
-      this.apiMongo.addBlacklistedWord(this.whiteListName).subscribe(data=> {
-        this.apiMongo.getBlackList().subscribe(data => {
-          this.words = data;
+      this.apiMongo.addWhitelistedWord(this.whiteListName).subscribe(data=> {
+        this.apiMongo.getWhiteList().subscribe(data => {
+          //this.words = data;
         });
       });
+      this.apiMongo.addWhiteListedTypeWord("programador", "test").subscribe(data=>{
+
+      });
+      
     }
-    */ 
+    
   }
 
 
@@ -94,7 +103,7 @@ export class TwitterWhitelistComponent implements OnInit {
   deleteBlacklistedWord(word: string){
     this.apiMongo.deleteBlacklistedWord(word).subscribe(data=> {
       this.apiMongo.getBlackList().subscribe(data => {
-        this.words = data;
+        //this.words = data;
       });
     }); 
 
