@@ -12,15 +12,15 @@ export class LinkedInComponent implements OnInit {
 
   constructor() { }
 
-  inicio = true;
+  inicio = false;
   nombre: string= "";
 
-  jess = false;
+  jess = true;
   gui = false;
 
 
   ngOnInit(): void {
-    this.jess = false;
+    this.jess = true;
     this.gui = false;
   }
 

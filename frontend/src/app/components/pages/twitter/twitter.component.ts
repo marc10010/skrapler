@@ -271,7 +271,7 @@ export class TwitterComponent implements OnInit {
               if( this.dictWords.has(word[i].toLowerCase()) ){
                 this.dictWords.set(word[i].toLowerCase(), (this.dictWords.get(word[i].toLowerCase()) + 1) );
               }
-              else this.dictWords.set(word[i].toLowerCase(), 1);
+              else if(word[i].toLowerCase() !="") this.dictWords.set(word[i].toLowerCase(), 1);
             }
             
           }

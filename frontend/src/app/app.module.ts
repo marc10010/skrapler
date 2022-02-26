@@ -28,7 +28,6 @@ import { environment } from 'src/environments/environment';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './services/auth.guard';
-import { TwitterWhitelistComponent } from '../app/components/popups/twitter-whitelist/twitter-whitelist.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +40,7 @@ import { TwitterWhitelistComponent } from '../app/components/popups/twitter-whit
     TwitterWordsFilterComponent,
     DialogPopUpComponent,
     LoginComponent,
-    RegisterComponent,
-    TwitterWhitelistComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

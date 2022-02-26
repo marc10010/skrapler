@@ -70,6 +70,7 @@ export class TwitterWordsFilterComponent implements OnInit {
       this.apiMongo.addBlacklistedWord(this.wordSelected.Word).subscribe(data=> {
         this.apiMongo.getBlackList().subscribe(data => {
           this.words = data;
+          this.wordAll=this.words
           console.log(this.words);
         });
       });
@@ -105,6 +106,7 @@ export class TwitterWordsFilterComponent implements OnInit {
     this.apiMongo.deleteBlacklistedWord(word).subscribe(data=> {
       this.apiMongo.getBlackList().subscribe(data => {
         this.words = data;
+        this.wordAll=this.words
       });
     }); 
 
